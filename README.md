@@ -18,13 +18,15 @@ To resolve this issue, it is **highly recommended** to use [ng-router-loader]. H
 - [Getting started](#getting-started)
     - [Installation](#installation)
 	- [Examples](#examples)
-	- [@nglibs packages](#nglibs-packages)
-	- [Adding @nglibs/i18n-router to your project (SystemJS)](#adding-nglibsi18n-router-to-your-project-systemjs)
+	- [`@nglibs` packages](#nglibs-packages)
+	- [Adding `@nglibs/i18n-router` to your project (SystemJS)](#adding-nglibsi18n-router-to-your-project-systemjs)
 	- [Route configuration](#route-configuration)
     - [app.module configuration](#appmodule-configuration)
 	- [Feature modules configuration](#feature-modules-configuration)
 	- [app.component configuration](#appcomponent-configuration)
 - [Settings](#settings)
+	- [Setting up `I18NRouterModule` to use `I18NRouterStaticLoader`](#setting-up-i18nroutermodule-to-use-i18nrouterstaticloader)
+	- [Setting up `I18NRouterModule` to use `I18NRouterHttpLoader`](#setting-up-i18nroutermodule-to-use-i18nrouterhttploader)
 	- [Translations object](#translations-object)
 - [Change language (runtime)](#change-language-runtime)
 - [Pipe](#pipe)
@@ -46,14 +48,14 @@ npm install @nglibs/i18n-router --save
 ### Examples
 - [@nglibs/example-app] is an officially maintained example application showcasing best practices for **[@nglibs]** utilities.
 
-### @nglibs packages
+### `@nglibs` packages
 
 - [@nglibs/config]
 - [@nglibs/metadata]
 - [@nglibs/i18n-router]
 - [@nglibs/i18n-router-config-loader]
 
-### Adding @nglibs/i18n-router to your project (SystemJS)
+### Adding `@nglibs/i18n-router` to your project (SystemJS)
 Add `map` for **`@nglibs/i18n-router`** in your `systemjs.config`
 ```javascript
 '@nglibs/i18n-router': 'node_modules/@nglibs/i18n-router/bundles/i18n-router.umd.min.js'
@@ -62,6 +64,7 @@ Add `map` for **`@nglibs/i18n-router`** in your `systemjs.config`
 ### Route configuration
 In order to use **`@nglibs/i18n-router`** properly, you should have more or less a similar **route structure** as follows:
 
+#### app.routes.ts
 ```TypeScript
 export const routes: Routes = [
   {
@@ -141,6 +144,7 @@ Also, don't forget to provide `I18N_ROUTER_PROVIDERS` within the providers prope
 
 **Note**: `I18N_ROUTER_PROVIDERS` must be imported in the **app.module** (*instead of in `I18NRouterModule`*), to resolve the `I18NRouterService` dependency at the **uppermost level** (*otherwise child modules will have different instances of `I18NRouterService`*).
 
+#### app.module.ts
 ```TypeScript
 ...
 import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@nglibs/i18n-router';
@@ -170,7 +174,7 @@ import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@nglibs/i18n-router';
 
 Import `I18NRouterModule` using the mapping `'@nglibs/i18n-router'` and append `I18NRouterModule.forChild(routes, moduleKey)` within the imports property of the **feature module**. The `moduleKey` parameter for the `forChild` method obviously refers to the **module's root path** (*in kebab-case*).
 
-**home.routes.ts**
+#### home.routes.ts
 ```TypeScript
 export const routes: Routes = [
   {
@@ -180,7 +184,7 @@ export const routes: Routes = [
 ];
 ```
 
-**home.module.ts**
+#### home.module.ts
 ```TypeScript
 ...
 import { I18NRouterModule } from '@nglibs/i18n-router';
@@ -197,7 +201,7 @@ import { I18NRouterModule } from '@nglibs/i18n-router';
 })
 ```
 
-**about.routes.ts**
+#### about.routes.ts
 ```TypeScript
 export const routes: Routes = [
   {
@@ -219,7 +223,7 @@ export const routes: Routes = [
 ];
 ```
 
-**about.module.ts**
+#### about.module.ts
 ```TypeScript
 ...
 import { I18NRouterModule } from '@nglibs/i18n-router';
@@ -245,6 +249,7 @@ Then, invoke the `init` method to initialize **`@nglibs/i18n-router`**.
 
 Lastly, you need to invoke the `changeLanguage` method by supplying the **2-letter language code**, which translates routes to the specified language.
 
+#### app.component.ts
 ```TypeScript
 ...
 import { I18NRouterService } from '@nglibs/i18n-router';
@@ -258,7 +263,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly i18nRouter: I18NRouterService) {
     // providing false will won't init i18n-router,
 	// in the case you need to init i18n-router programmatically
-    i18nRouter.init(true);
+    i18nRouter.init();
   }
   ...
   ngOnInit(): void {
@@ -270,14 +275,21 @@ export class AppComponent implements OnInit {
 
 ## Settings
 
-You can call the [forRoot] static method using the `I18NStaticLoader`. By default, it is configured to pass the routes to **`@nglibs/i18n-router`** and have no translations.
+You can call the [forRoot] static method using `I18NRouterStaticLoader`. By default, it is configured to pass the **routes** to **`@nglibs/i18n-router`** and have no translations.
 
-You can customize this behavior (*and ofc other settings*) by supplying an object containing route translations to `I18NStaticLoader`.
+> You can customize this behavior (*and ofc other settings*) by supplying **route translations** to `I18NRouterStaticLoader`.
 
-You can also use the **[@nglibs/i18n-router-config-loader]**, which loads route translations using **[@nglibs/config]** during application initialization.
+If you provide route translations using a `JSON` file or an `API`, you can call the [forRoot] static method using the `I18NRouterHttpLoader`. By default, it is configured to retrieve **route translations** from the path `/routes.json` (*if not specified*).
 
-The following example shows the use of an exported function (*instead of an inline function*) for [AoT compilation].
+> You can customize this behavior (and ofc other settings) by supplying a **file path/api endpoint** to I18NRouterHttpLoader.
 
+You can also use the **[@nglibs/i18n-router-config-loader]**, to **reduce** the **amount** of `HTTP` requests during application initalization, by including **route translations** within the **application settings** - if [@nglibs/config] is already used to retrieve settings by the **Angular** app.
+
+The following examples show the use of an exported function (*instead of an inline function*) for [AoT compilation].
+
+### Setting up `I18NRouterModule` to use `I18NRouterStaticLoader`
+
+#### app.module.ts
 ```TypeScript
 ...
 import { I18NRouterModule, I18NRouterLoader, I18NRouterStaticLoader, I18N_ROUTER_PROVIDERS, RAW_ROUTES } from '@nglibs/i18n-router';
@@ -326,8 +338,77 @@ export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
   ...
   bootstrap: [AppComponent]
 })
-
 ```
+
+`I18NRouterStaticLoader` has two parameters:
+
+- **routes**: `Routes`: raw routes
+- **translations**: `any` : route translations
+
+### Setting up `I18NRouterModule` to use `I18NRouterHttpLoader`
+
+#### routes.json
+```json
+{
+  "en": {
+    "ROOT.ABOUT": "about",
+    "ROOT.ABOUT.US": "us",
+    "ROOT.ABOUT.BANANA": "banana",
+    "ROOT.ABOUT.APPLE": "apple",
+    "ROOT.ABOUT.APPLE.PEAR": "pear",
+    "CHANGE_LANGUAGE": "change-language"
+  },
+  "tr": {
+    "ROOT.ABOUT": "hakkinda",
+    "ROOT.ABOUT.US": "biz",
+    "ROOT.ABOUT.BANANA": "muz",
+    "ROOT.ABOUT.APPLE": "elma",
+    "ROOT.ABOUT.APPLE.PEAR": "armut",
+    "CHANGE_LANGUAGE": "dil-secimi"
+  }
+}
+```
+
+#### app.module.ts
+```TypeScript
+...
+import { Http } from '@angular/http';
+import { I18NRouterModule, I18NRouterLoader, I18NRouterHttpLoader, I18N_ROUTER_PROVIDERS, RAW_ROUTES } from '@nglibs/i18n-router';
+...
+
+export function i18nRouterFactory(http: Http, rawRoutes: Routes): I18NRouterLoader {
+  return new I18NRouterHttpLoader(http, rawRoutes, '/routes.json'); // FILE PATH || API ENDPOINT
+}
+
+...
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ...
+  ],
+  imports: [
+    RouterModule.forRoot(routes),
+    I18NRouterModule.forRoot(routes, [
+      { provide: I18NRouterLoader, useFactory: (i18nRouterFactory), deps: [Http, RAW_ROUTES] }
+    ]),
+    ...
+  ],
+  ...
+  providers: [
+    I18N_ROUTER_PROVIDERS,
+	...
+  ],
+  ...
+  bootstrap: [AppComponent]
+})
+```
+
+`I18NRouterHttpLoader` has three parameters:
+
+- **http**: `Http` : Http instance
+- **routes**: `Routes`: raw routes
+- **path**: `string` : path to `JSON file`/`API endpoint`, to retrieve route translations from (*by default, `routes.json`*)
 
 ### Translations object
 
@@ -470,11 +551,9 @@ routes:
 	"SITE_MAP": "site-haritasi"
   }
 }
-
 ```
 
-
-Hooyah! It was quite a long story, but **`@nglibs/i18n-router`** will now translate each `path` and `redirectTo` property of routes.
+> :+1: Hooyah! It was quite a long story, but **`@nglibs/i18n-router`** will now translate each `path` and `redirectTo` property of routes.
 
 ## Change language (runtime)
 
