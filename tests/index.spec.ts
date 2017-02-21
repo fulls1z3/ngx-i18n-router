@@ -2,6 +2,8 @@
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { Http, BaseRequestOptions, HttpModule } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -25,6 +27,7 @@ class TestSharedModule { }
 
 @NgModule({
     imports: [
+        HttpModule,
         TestSharedModule,
         I18NRouterModule.forChild([
                 {
@@ -134,6 +137,15 @@ export const testModuleConfig = (routes: Routes = [], moduleOptions?: Array<any>
                 I18NRouterModule.forRoot(routes, moduleOptions)
             ],
             providers: [
+                {
+                    provide: Http,
+                    useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
+                        return new Http(mockBackend, options);
+                    },
+                    deps: [MockBackend, BaseRequestOptions]
+                },
+                MockBackend,
+                BaseRequestOptions,
                 I18N_ROUTER_PROVIDERS
             ]
         });

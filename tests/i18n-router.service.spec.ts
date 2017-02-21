@@ -9,9 +9,7 @@ import { TestBootstrapComponent, TestComponent, testRoutes, testTranslations, te
 describe('@nglibs/i18n-router:',
     () => {
         beforeEach(() => {
-            function i18nRouterFactory(): I18NRouterLoader {
-                return new I18NRouterStaticLoader(testRoutes, testTranslations);
-            }
+            const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
 
             testModuleConfig(testRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
         });
@@ -192,9 +190,7 @@ describe('@nglibs/i18n-router:',
                                 }
                             };
 
-                            function i18nRouterFactory(): I18NRouterLoader {
-                                return new I18NRouterStaticLoader(someRoutes, someTranslations);
-                            }
+                            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
 
                             testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
 
@@ -246,9 +242,7 @@ describe('@nglibs/i18n-router:',
                                 }
                             };
 
-                            function i18nRouterFactory(): I18NRouterLoader {
-                                return new I18NRouterStaticLoader(someRoutes, someTranslations);
-                            }
+                            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
 
                             testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
 
