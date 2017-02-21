@@ -1,6 +1,6 @@
 {
   "name": "@nglibs/i18n-router",
-  "version": "0.2.0-beta.1",
+  "version": "0.2.0-beta.2",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
     "i18n",
     "async",
     "localized router",
+    "router",
     "i18n router",
     "angular"
   ],
@@ -44,6 +45,7 @@
     "@angular/core": "~2.4.7",
     "@angular/common": "~2.4.7",
     "@angular/router": "~3.4.7",
+    "@angular/http": "~2.4.7",
     "@types/node": "^7.0.5",
     "@types/jasmine": "^2.5.41",
     "@types/lodash": "4.14.44",
@@ -74,6 +76,7 @@
   "peerDependencies": {
     "@angular/core": "^2.4.0 || >=4.0.0-beta.0",
     "@angular/router": "^3.4.0 || >=4.0.0-beta.0",
+    "@angular/http": "^2.4.0 || >=4.0.0-beta.0",
     "rxjs": "^5.0.3"
   }
 }
