@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## v0.2.0-beta.2 - 2017-02-20
+### Added
+- Added 'I18NRouterHttpLoader`
+
 ## v0.2.0-beta.1 - 2017-02-17
 ### Added
 - Added unit tests
