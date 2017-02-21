@@ -19,7 +19,7 @@ export class I18NRouterPipe implements PipeTransform {
 
     transform(query: string | Array<any>): string {
         if (typeof query === 'string' && !!query && query.length)
-            throw new Error('Error: Query must be an empty string or an array!');
+            throw new Error('Query must be an empty string or an array!');
 
         if (!this.i18nRouter.languageCode || !this.i18nRouter.useLocalizedRoutes)
             return `/${typeof query === 'string' ? query : query.join('/')}`;
