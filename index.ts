@@ -1,5 +1,6 @@
 // angular
-import { ANALYZE_FOR_ENTRY_COMPONENTS, Inject, NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf } from '@angular/core';
+import { ANALYZE_FOR_ENTRY_COMPONENTS, APP_INITIALIZER, Inject, NgModule, ModuleWithProviders, OpaqueToken, Optional,
+         SkipSelf } from '@angular/core';
 import { provideRoutes, RouterModule, Router, Routes } from '@angular/router';
 import { ROUTES } from '@angular/router/src/router_config_loader';
 
@@ -22,8 +23,12 @@ export function i18nRouterFactory(routes: Routes): I18NRouterLoader {
     return new I18NRouterStaticLoader(routes, {});
 }
 
-const I18N_ROUTER_FORROOT_GUARD = new OpaqueToken('I18N_ROUTER_FORROOT_GUARD');
-const MODULE_KEY = new OpaqueToken('MODULE_KEY');
+export function initializerFactory(loader: I18NRouterLoader): any {
+    return () => loader.loadTranslations();
+}
+
+export const I18N_ROUTER_FORROOT_GUARD = new OpaqueToken('I18N_ROUTER_FORROOT_GUARD');
+export const MODULE_KEY = new OpaqueToken('MODULE_KEY');
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -47,6 +52,12 @@ export class I18NRouterModule {
             ngModule: I18NRouterModule,
             providers: [
                 ...configuredProviders,
+                {
+                    provide: APP_INITIALIZER,
+                    useFactory: (initializerFactory),
+                    deps: [I18NRouterLoader],
+                    multi: true
+                },
                 {
                     provide: RAW_ROUTES,
                     useValue: routes

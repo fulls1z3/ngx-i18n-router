@@ -1,9 +1,6 @@
 // angular
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { Route, Router } from '@angular/router';
-
-// libs
-import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 // module
 import { I18NRouterService, ROOT_ROUTE_PREFIX } from './i18n-router.service';
@@ -19,7 +16,7 @@ export class I18NRouterPipe implements PipeTransform {
 
     transform(query: string | Array<any>): string {
         if (typeof query === 'string' && !!query && query.length)
-            throw new Error('Error: Query must be an empty string or an array!');
+            throw new Error('Query must be an empty string or an array!');
 
         if (!this.i18nRouter.languageCode || !this.i18nRouter.useLocalizedRoutes)
             return `/${typeof query === 'string' ? query : query.join('/')}`;
