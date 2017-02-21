@@ -1,5 +1,5 @@
 // angular
-import { Injectable, OpaqueToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Route, Router, Routes } from '@angular/router';
 
 // libs
@@ -18,14 +18,13 @@ export class I18NRouterService {
     private readonly routes: Routes;
     private translations: any;
 
-    constructor(private readonly router: Router,
-                public loader: I18NRouterLoader
-    ) {
+    constructor(public loader: I18NRouterLoader,
+                private readonly router: Router) {
         this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
     }
 
     init(useLocalizedRoutes: boolean = true): void {
-        // don't init i18n-router unless allowed
+        // don't use i18n-router unless allowed
         if (!useLocalizedRoutes)
             return;
 

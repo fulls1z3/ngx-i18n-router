@@ -9,9 +9,7 @@ import { testRoutes, testTranslations, testModuleConfig } from './index.spec';
 describe('@nglibs/i18n-router:',
     () => {
         beforeEach(() => {
-            function i18nRouterFactory(): I18NRouterLoader {
-                return new I18NRouterStaticLoader(testRoutes, testTranslations);
-            }
+            const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
 
             testModuleConfig(testRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
         });
@@ -67,7 +65,7 @@ describe('@nglibs/i18n-router:',
                             const pipe = new I18NRouterPipe(router, i18nRouter);
 
                             expect(() => pipe.transform('about'))
-                                .toThrowError('Error: Query must be an empty string or an array!');
+                                .toThrowError('Query must be an empty string or an array!');
                         }));
 
                 it('should be able to partly translate routes w/missing translations',
@@ -94,7 +92,7 @@ describe('@nglibs/i18n-router:',
                             expect(translatedPath).toEqual('/en');
                         }));
 
-                it('should be able to translate a route',
+                it('should be able to translate a route inside the `i18n-root`',
                     inject([Router, I18NRouterService],
                         (router: Router, i18nRouter: I18NRouterService) => {
                             i18nRouter.init();
