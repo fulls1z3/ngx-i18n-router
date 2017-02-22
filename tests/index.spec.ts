@@ -8,7 +8,7 @@ import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 // module
-import { I18NRouterModule, I18NRouterPipe, I18N_ROUTER_PROVIDERS } from '../index';
+import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '../index';
 
 @Component({ template: '<router-outlet></router-outlet>' })
 export class TestBootstrapComponent {}

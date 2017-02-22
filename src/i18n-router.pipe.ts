@@ -1,9 +1,6 @@
 // angular
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { Route, Router } from '@angular/router';
-
-// libs
-import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 // module
 import { I18NRouterService, ROOT_ROUTE_PREFIX } from './i18n-router.service';
