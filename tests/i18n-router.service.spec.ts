@@ -26,7 +26,7 @@ describe('@nglibs/i18n-router:',
 
                 it('should not translate routes w/o default initialization',
                     inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -46,7 +46,7 @@ describe('@nglibs/i18n-router:',
                                 .then(() => {
                                     expect(router.url).toEqual('/');
                                 });
-                        })));
+                        }));
 
                 it('should not translate routes w/o translations',
                     inject([Router, I18NRouterService],
@@ -61,8 +61,8 @@ describe('@nglibs/i18n-router:',
                         }));
 
                 it('should be able to `partly` translate routes w/missing translations',
-                    inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                    fakeAsync(inject([I18NRouterService],
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -80,8 +80,8 @@ describe('@nglibs/i18n-router:',
                         })));
 
                 it('should be able to `catchall` redirect to `i18n-root`',
-                    inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                    fakeAsync(inject([I18NRouterService],
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -99,8 +99,8 @@ describe('@nglibs/i18n-router:',
                         })));
 
                 it('should be able to translate `path` property of routes',
-                    inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                    fakeAsync(inject([I18NRouterService],
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -118,8 +118,8 @@ describe('@nglibs/i18n-router:',
                         })));
 
                 it('should be able to translate `redirectTo` property of routes',
-                    inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                    fakeAsync(inject([I18NRouterService],
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -137,8 +137,8 @@ describe('@nglibs/i18n-router:',
                         })));
 
                 it('should be able to translate routes outside the `i18n-root`',
-                    inject([I18NRouterService],
-                        fakeAsync((i18nRouter: I18NRouterService) => {
+                    fakeAsync(inject([I18NRouterService],
+                        (i18nRouter: I18NRouterService) => {
                             const injector = getTestBed();
                             const router = injector.get(Router);
 
@@ -156,111 +156,110 @@ describe('@nglibs/i18n-router:',
                         })));
 
                 it('should be able to translate routes w/`i18n-root` route `non-empty` string',
-                        fakeAsync(() => {
-                            const someRoutes: Routes = [
-                                {
-                                    path: 'home',
-                                    component: TestBootstrapComponent,
-                                    children: [
-                                        {
-                                            path: '',
-                                            component: TestComponent
-                                        },
-                                        {
-                                            path: 'about',
-                                            component: TestComponent
-                                        }
-                                    ],
-                                    data: {
-                                        i18n: {
-                                            isRoot: true
-                                        }
+                    fakeAsync(() => {
+                        const someRoutes: Routes = [
+                            {
+                                path: 'home',
+                                component: TestBootstrapComponent,
+                                children: [
+                                    {
+                                        path: '',
+                                        component: TestComponent
+                                    },
+                                    {
+                                        path: 'about',
+                                        component: TestComponent
+                                    }
+                                ],
+                                data: {
+                                    i18n: {
+                                        isRoot: true
                                     }
                                 }
-                            ];
+                            }
+                        ];
 
-                            const someTranslations = {
-                                "en": {
-                                    "ROOT.HOME": 'home',
-                                    "ROOT.ABOUT": 'about'
-                                },
-                                "tr": {
-                                    "ROOT.HOME": 'ana-sayfa',
-                                    "ROOT.ABOUT": 'hakkinda'
-                                }
-                            };
+                        const someTranslations = {
+                            "en": {
+                                "ROOT.HOME": 'home',
+                                "ROOT.ABOUT": 'about'
+                            },
+                            "tr": {
+                                "ROOT.HOME": 'ana-sayfa',
+                                "ROOT.ABOUT": 'hakkinda'
+                            }
+                        };
 
-                            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+                        const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
 
-                            testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
+                        testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
 
-                            const injector = getTestBed();
-                            const router = injector.get(Router);
-                            const i18nRouter = injector.get(I18NRouterService);
+                        const injector = getTestBed();
+                        const router = injector.get(Router);
+                        const i18nRouter = injector.get(I18NRouterService);
 
-                            i18nRouter.init();
-                            i18nRouter.changeLanguage('tr');
+                        i18nRouter.init();
+                        i18nRouter.changeLanguage('tr');
 
-                            const fixture = TestBed.createComponent(TestBootstrapComponent);
-                            fixture.detectChanges();
+                        const fixture = TestBed.createComponent(TestBootstrapComponent);
+                        fixture.detectChanges();
 
-                            // navigate to /home
-                            router.navigate(['/tr/ana-sayfa'])
-                                .then(() => {
-                                    expect(router.url).toEqual('/tr/ana-sayfa');
-                                });
-                        }));
-
+                        // navigate to /home
+                        router.navigate(['/tr/ana-sayfa'])
+                            .then(() => {
+                                expect(router.url).toEqual('/tr/ana-sayfa');
+                            });
+                    }));
 
                 it('should be able to translate routes w/o `i18n-root`',
-                        fakeAsync(() => {
-                            const someRoutes: Routes = [
-                                {
-                                    path: 'home',
-                                    component: TestBootstrapComponent,
-                                    children: [
-                                        {
-                                            path: '',
-                                            component: TestComponent
-                                        },
-                                        {
-                                            path: 'about',
-                                            component: TestComponent
-                                        }
-                                    ]
-                                }
-                            ];
+                    fakeAsync(() => {
+                        const someRoutes: Routes = [
+                            {
+                                path: 'home',
+                                component: TestBootstrapComponent,
+                                children: [
+                                    {
+                                        path: '',
+                                        component: TestComponent
+                                    },
+                                    {
+                                        path: 'about',
+                                        component: TestComponent
+                                    }
+                                ]
+                            }
+                        ];
 
-                            const someTranslations = {
-                                "en": {
-                                    "HOME": 'home',
-                                    "ABOUT": 'about'
-                                },
-                                "tr": {
-                                    "HOME": 'ana-sayfa',
-                                    "ABOUT": 'hakkinda'
-                                }
-                            };
+                        const someTranslations = {
+                            "en": {
+                                "HOME": 'home',
+                                "ABOUT": 'about'
+                            },
+                            "tr": {
+                                "HOME": 'ana-sayfa',
+                                "ABOUT": 'hakkinda'
+                            }
+                        };
 
-                            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+                        const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
 
-                            testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
+                        testModuleConfig(someRoutes, [{ provide: I18NRouterLoader, useFactory: (i18nRouterFactory) }]);
 
-                            const injector = getTestBed();
-                            const router = injector.get(Router);
-                            const i18nRouter = injector.get(I18NRouterService);
+                        const injector = getTestBed();
+                        const router = injector.get(Router);
+                        const i18nRouter = injector.get(I18NRouterService);
 
-                            i18nRouter.init();
-                            i18nRouter.changeLanguage('tr');
+                        i18nRouter.init();
+                        i18nRouter.changeLanguage('tr');
 
-                            const fixture = TestBed.createComponent(TestBootstrapComponent);
-                            fixture.detectChanges();
+                        const fixture = TestBed.createComponent(TestBootstrapComponent);
+                        fixture.detectChanges();
 
-                            // navigate to /home
-                            router.navigate(['/ana-sayfa'])
-                                .then(() => {
-                                    expect(router.url).toEqual('/ana-sayfa');
-                                });
-                        }));
+                        // navigate to /home
+                        router.navigate(['/ana-sayfa'])
+                            .then(() => {
+                                expect(router.url).toEqual('/ana-sayfa');
+                            });
+                    }));
             });
     });

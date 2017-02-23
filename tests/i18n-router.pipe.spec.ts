@@ -92,7 +92,7 @@ describe('@nglibs/i18n-router:',
                             expect(translatedPath).toEqual('/en');
                         }));
 
-                it('should be able to translate a route',
+                it('should be able to translate a route inside the `i18n-root`',
                     inject([Router, I18NRouterService],
                         (router: Router, i18nRouter: I18NRouterService) => {
                             i18nRouter.init();
