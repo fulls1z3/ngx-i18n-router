@@ -1,6 +1,6 @@
 {
   "name": "@nglibs/i18n-router",
-  "version": "0.2.0-beta.2",
+  "version": "0.2.0-beta.3",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
