@@ -24,7 +24,7 @@ export class I18NRouterService {
     }
 
     init(useLocalizedRoutes: boolean = true): void {
-        // don't init i18n-router unless allowed
+        // don't use i18n-router unless allowed
         if (!useLocalizedRoutes)
             return;
 
