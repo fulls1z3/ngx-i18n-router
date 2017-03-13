@@ -12,148 +12,150 @@ export const ROOT_ROUTE_PREFIX = 'ROOT';
 
 @Injectable()
 export class I18NRouterService {
-    languageCode: string;
-    useLocalizedRoutes: boolean;
+  languageCode: string;
+  useLocalizedRoutes: boolean;
 
-    private readonly routes: Routes;
-    private translations: any;
+  private readonly routes: Routes;
+  private translations: any;
 
-    constructor(public loader: I18NRouterLoader,
-                private readonly router: Router) {
-        this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
+  constructor(public loader: I18NRouterLoader,
+              private readonly router: Router) {
+    this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
+  }
+
+  init(useLocalizedRoutes: boolean = true): void {
+    // don't use i18n-router unless allowed
+    if (!useLocalizedRoutes)
+      return;
+
+    this.useLocalizedRoutes = true;
+    this.translations = this.loader.getTranslations();
+  }
+
+  changeLanguage(languageCode: string): void {
+    // don't translate routes unless allowed
+    if (!this.useLocalizedRoutes)
+      return;
+
+    // don't translate routes unless got translations
+    if (!this.translations[languageCode])
+      return;
+
+    this.languageCode = languageCode;
+
+    const rawRoutes = this.loader.getRoutes();
+    const i18nRoot = _.find(rawRoutes, (route) => (!!route.data && !!(<any>route.data).i18n) && (<any>route.data).i18n.isRoot);
+
+    let routes: Routes = [];
+
+    // translate routes
+    if (!!i18nRoot) {
+      const rootPath = this.translateRoute(i18nRoot, 'path').path || i18nRoot.path;
+      routes = [{
+        path: '',
+        redirectTo: this.interpolateRoute(rootPath),
+        pathMatch: 'full'
+      }];
     }
 
-    init(useLocalizedRoutes: boolean = true): void {
-        // don't use i18n-router unless allowed
-        if (!useLocalizedRoutes)
-            return;
+    const translatedRoutes = this.translateRoutes(rawRoutes);
+    routes = routes.concat(translatedRoutes);
 
-        this.useLocalizedRoutes = true;
-        this.translations = this.loader.getTranslations();
-    }
+    this.router.resetConfig(routes);
+  }
 
-    changeLanguage(languageCode: string): void {
-        // don't translate routes unless allowed
-        if (!this.useLocalizedRoutes)
-            return;
+  getTranslation(key: string): string {
+    key = key.replace(/-/, '_');
 
-        // don't translate routes unless got translations
-        if (!this.translations[languageCode])
-            return;
+    if (!this.translations[this.languageCode][key.toUpperCase()])
+      return undefined;
 
-        this.languageCode = languageCode;
+    return this.translations[this.languageCode][key.toUpperCase()];
+  }
 
-        const rawRoutes = this.loader.getRoutes();
-        const i18nRoot = _.find(rawRoutes, (route) => (!!route.data && !!(<any>route.data).i18n) && !!(<any>route.data).i18n.isRoot);
+  translateRoutes(routes: Routes, moduleKey: string = ''): Routes {
+    const translatedRoutes: Array<Route> = [];
 
-        let routes: Routes = [];
-
-        // translate routes
-        if (!!i18nRoot) {
-            const rootPath = this.translateRoute(i18nRoot, 'path').path || i18nRoot.path;
-            routes = [{ path: '', redirectTo: this.interpolateRoute(rootPath), pathMatch: 'full' }];
+    routes.forEach((route: Route) => {
+      if (_.isArray(route.children)) {
+        if ((!!route.data && !!(<any>route.data).i18n) && (<any>route.data).i18n.isRoot)
+          route.path = this.interpolateRoute(route.path);
+        else {
+          if (!!route.path)
+            route = this.translateRoute(route, 'path', moduleKey);
         }
 
-        const translatedRoutes = this.translateRoutes(rawRoutes);
-        routes = routes.concat(translatedRoutes);
+        route.children = this.translateRoutes(route.children, moduleKey);
+      }
+      else if (!moduleKey && route.path === '**')
+        route.redirectTo = this.interpolateRoute(route.redirectTo);
+      else {
+        if (!!route.path)
+          route = this.translateRoute(route, 'path', moduleKey);
 
-        this.router.resetConfig(routes);
-    }
+        if (!!route.redirectTo)
+          route = this.translateRoute(route, 'redirectTo', moduleKey);
+      }
 
-    getTranslation(key: string): string {
-        key = key.replace(/-/, '_');
+      translatedRoutes.push(route);
+    });
 
-        if (!this.translations[this.languageCode][key.toUpperCase()])
-            return undefined;
+    return translatedRoutes;
+  }
 
-        return this.translations[this.languageCode][key.toUpperCase()];
-    }
+  private interpolateRoute(path: string): string {
+    if (!path || path.length === 0)
+      return this.languageCode;
 
-    translateRoutes(routes: Routes, moduleKey: string = ''): Routes {
-        const translatedRoutes: Array<Route> = [];
+    path = _.filter(path.split('/'), (segment: string) => !!segment).join('/');
 
-        routes.forEach((route: Route) => {
-            if (_.isArray(route.children)) {
-                if ((!!route.data && !!(<any>route.data).i18n) && !!(<any>route.data).i18n.isRoot)
-                    route.path = this.interpolateRoute(route.path);
-                else {
-                    if (!!route.path)
-                        route = this.translateRoute(route, 'path', moduleKey);
-                }
+    return `${this.languageCode}/${path}`;
+  }
 
-                route.children = this.translateRoutes(route.children, moduleKey);
-            }
-            else if (!moduleKey && route.path === '**')
-                route.redirectTo = this.interpolateRoute(route.redirectTo);
-            else {
-                if (!!route.path)
-                    route = this.translateRoute(route, 'path', moduleKey);
+  private translateRoute(route: Route, property: string, moduleKey: string = ''): Route {
+    const translateBatch: Array<string> = [];
+    let batchKey = '';
 
-                if (!!route.redirectTo)
-                    route = this.translateRoute(route, 'redirectTo', moduleKey);
-            }
+    const key = _.filter(route[property].split('/'), (segment) => !!segment);
+    const isRedirection = property === 'redirectTo' && _.startsWith(route[property], '/');
 
-            translatedRoutes.push(route);
-        });
+    (key as Array<string>).forEach((segment: any, index: number) => {
+      let prefix = '';
 
-        return translatedRoutes;
-    }
+      let currentKey = `${ROOT_ROUTE_PREFIX}.${!!moduleKey && !isRedirection ? `${moduleKey}.` : ''}${segment}`;
 
-    private interpolateRoute(path: string): string {
-        if (!path || path.length === 0)
-            return this.languageCode;
+      if (index === 0) {
+        prefix = this.getTranslation(currentKey);
 
-        path = _.filter(path.split('/'), (segment: string) => !!segment).join('/');
+        if (!!prefix) {
+          if (isRedirection)
+            translateBatch.push(this.languageCode);
 
-        return `${this.languageCode}/${path}`;
-    }
+          batchKey = currentKey;
+        }
+      }
 
-    private translateRoute(route: Route, property: string, moduleKey: string = ''): Route {
-        const translateBatch: Array<string> = [];
-        let batchKey = '';
+      currentKey = index === 0 ? (!!prefix ? batchKey : segment) : `${batchKey}.${segment}`;
+      const translatedSegment = !_.startsWith(segment, ':') ? this.getTranslation(currentKey) : '';
 
-        const key = _.filter(route[property].split('/'), (segment) => !!segment);
-        const isRedirection = property === 'redirectTo' && _.startsWith(route[property], '/');
+      if (!!translatedSegment)
+        batchKey = currentKey;
 
-        (key as Array<string>).forEach((segment: any, index: number) => {
-            let prefix = '';
+      translateBatch.push(translatedSegment || segment);
+    });
 
-            let currentKey = `${ROOT_ROUTE_PREFIX}.${!!moduleKey && !isRedirection ? `${moduleKey}.` : ''}${segment}`;
+    route[property] = translateBatch.join('/');
 
-            if (index === 0) {
-                prefix = this.getTranslation(currentKey);
+    if (isRedirection)
+      route[property] = `/${route[property]}`;
 
-                if (!!prefix) {
-                    if (isRedirection)
-                        translateBatch.push(this.languageCode);
-
-                    batchKey = currentKey;
-                }
-            }
-
-            currentKey = index === 0 ? (!!prefix ? batchKey : segment) : `${batchKey}.${segment}`;
-            const translatedSegment = !_.startsWith(segment, ':') ? this.getTranslation(currentKey) : '';
-
-            if (!!translatedSegment)
-                batchKey = currentKey;
-
-            translateBatch.push(translatedSegment || segment);
-        });
-
-        route[property] = translateBatch.join('/');
-
-        if (isRedirection)
-            route[property] = `/${route[property]}`;
-
-        return route;
-    }
+    return route;
+  }
 }
 
 export function provideChildRoutes(i18nRouter: I18NRouterService, routes: Routes, moduleKey: string): Routes {
-    if (!i18nRouter.useLocalizedRoutes)
-        return routes;
+  if (!i18nRouter.useLocalizedRoutes)
+    return routes;
 
-    const translatedRoutes = i18nRouter.translateRoutes(routes, moduleKey);
-
-    return translatedRoutes;
+  return i18nRouter.translateRoutes(routes, moduleKey);
 }
