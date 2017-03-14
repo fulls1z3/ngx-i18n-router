@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## v0.2.0-beta.4 - 2017-03-15
+### Fixed
+- Resolved depend on Angular 2.0.0 (closes [#3](https://github.com/nglibs/i18n-router/issues/3))
+- Limited to Angular 2.x.x (use v0.4.0 for Angular 4.x.x)
+- Workaround for AoT compilation
+
+### Changed
+- Updated deps
+- Some refactoring
+
 ## v0.2.0-beta.3 - 2017-02-23
 ### Fixed
 - Forced to use TypeScript 2.1.x

@@ -1,6 +1,6 @@
 {
   "name": "@nglibs/i18n-router",
-  "version": "0.2.0-beta.3",
+  "version": "0.2.0-beta.4",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
@@ -69,14 +69,14 @@
     "karma-chrome-launcher": "^2.0.0",
     "source-map-loader": "^0.2.0",
     "istanbul-instrumenter-loader": "0.2.0",
-    "codelyzer": "^3.0.0-beta.3",
+    "codelyzer": "^2.0.1",
     "tslint": "^4.5.1",
     "typescript": "~2.1.6"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0 || >=4.0.0-beta.0",
-    "@angular/router": "^3.0.0 || >=4.0.0-beta.0",
-    "@angular/http": "^2.0.0 || >=4.0.0-beta.0",
+    "@angular/core": "^2.0.0",
+    "@angular/router": "^2.0.0",
+    "@angular/http": "^2.0.0",
     "rxjs": "^5.0.3"
   }
 }
