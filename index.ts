@@ -26,7 +26,9 @@ export function i18nRouterFactory(routes: Routes): I18NRouterLoader {
 }
 
 export function initializerFactory(loader: I18NRouterLoader): any {
-  return () => loader.loadTranslations();
+  // workaround for AoT compilation
+  const res = () => loader.loadTranslations();
+  return res;
 }
 
 export const I18N_ROUTER_FORROOT_GUARD = new OpaqueToken('I18N_ROUTER_FORROOT_GUARD');
