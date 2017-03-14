@@ -4,7 +4,12 @@
 
 **`@nglibs/i18n-router`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
 
+> If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
+
+> If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
+
 #### NOTICE
+
 **`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
 
 > `ERROR in Cannot read property 'loadChildren' of undefined`
@@ -34,15 +39,14 @@ To resolve this issue, it is **highly recommended** to use [ng-router-loader]. H
 - [License](#license)
 
 ## Prerequisites
-This package depends on `@angular v2.0.0` but it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might produce errors.
+This package depends on `@angular v4.0.0`, and the **[master]** branch does no longer support `@angular v2.x.x`.
+
+However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions (*especially `@angular/router v2.4.8`*) contain outdated dependencies, might produce errors.
+
+- If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
+- If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
 
 Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
-
-#### WARNING
-
-The pull request [#14327](https://github.com/angular/angular/pull/14327) on **`@angular v2.4.8`** and **`@angular v4.0.0-rc.1`**  introduced a severe error [#14588](https://github.com/angular/angular/issues/14588) which causes the app to fall into an infinite loop before bootstrapping.
-
-In order to avoid issues, avoid using these versions of **Angular**.
 
 ## Getting started
 ### Installation
@@ -623,6 +627,8 @@ The MIT License (MIT)
 Copyright (c) 2017 [Burak Tasci]
 
 [@nglibs]: https://github.com/nglibs
+[master]: https://github.com/nglibs/i18n-router/tree/master
+[v0.2.x]: https://github.com/nglibs/i18n-router/tree/v0.2.x
 [@nglibs/example-app]: https://github.com/nglibs/example-app
 [@nglibs/config]: https://github.com/nglibs/config
 [@nglibs/meta]: https://github.com/nglibs/meta
