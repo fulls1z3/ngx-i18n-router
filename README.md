@@ -4,29 +4,71 @@
 
 **`@nglibs/i18n-router`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
 
+#### NOTICE
+
 > If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 
 > If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
 
-#### NOTICE
+#### WARNING
 
 **`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
 
 > `ERROR in Cannot read property 'loadChildren' of undefined`
 
-It happens because **`@angular-cli`** uses **`@ngtools/webpack`** for [AoT compilation], expecting `RouterModule.forChild(...)` to resolve lazy-loaded modules (*with `loadChildren`*), which is replaced by `I18NRouterModule.forChild(...)` - providing routes for **feature modules** instead.
+This issue is caused by the `ngtools_impl` located in the package `@angular/compiler-cli`.
 
-To resolve this issue, it is **highly recommended** to use [ng-router-loader]. Hence **`@angular-cli`** doesn't allow **modifying** the **webpack configuration**, you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+The **`@ngtools/webpack`** forces routes to be *static*, to facilitate code splitting (*for lazy-loaded modules*) by webpack. However, **route providing** by `useFactory` are not supported. You can track the actual status of this issue at the following URLs:
+
+- https://github.com/nglibs/i18n-router/issues/2
+- https://github.com/angular/angular/issues/15305
+
+On the other hand, the [ng-router-loader] (together with `awesome-typescipt-loader`) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+
+If you really need to stick to **`@angular-cli`**, you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
+
+- **Method name:** `_collectRoutes`
+- **Line number:** 139
+- **Replacement:** comment the line containing `return routeList.concat(p.useValue);`, and replace with:
+```JavaScript
+if (p.useFactory != null) {
+  return routeList.concat(p.useFactory);
+} else {
+  return routeList.concat(p.useValue);
+}
+```
+
+#### [ngtools_impl.js](https://gist.github.com/fulls1z3/ca7541eeccc5b195f4854ff39d322d0e#file-ngtools_impl-js-L138)
+```JavaScript
+function _collectRoutes(providers, reflector, ROUTES) {
+  return providers.reduce(function (routeList, p) {
+    if (p.provide === ROUTES) {
+      // return routeList.concat(p.useValue);
+      if (p.useFactory != null) {
+        return routeList.concat(p.useFactory);
+      } else {
+        return routeList.concat(p.useValue);
+      }
+    }
+    else if (Array.isArray(p)) {
+      return routeList.concat(_collectRoutes(p, reflector, ROUTES));
+    }
+    else {
+      return routeList;
+    }
+  }, []);
+}
+```
 
 ## Table of contents:
 - [Prerequisites](#prerequisites)
 - [Getting started](#getting-started)
-    - [Installation](#installation)
+  - [Installation](#installation)
 	- [Examples](#examples)
 	- [`@nglibs` packages](#nglibs-packages)
 	- [Adding `@nglibs/i18n-router` to your project (SystemJS)](#adding-nglibsi18n-router-to-your-project-systemjs)
 	- [Route configuration](#route-configuration)
-    - [app.module configuration](#appmodule-configuration)
+  - [app.module configuration](#appmodule-configuration)
 	- [Feature modules configuration](#feature-modules-configuration)
 	- [app.component configuration](#appcomponent-configuration)
 - [Settings](#settings)
@@ -41,7 +83,7 @@ To resolve this issue, it is **highly recommended** to use [ng-router-loader]. H
 ## Prerequisites
 This package depends on `@angular v4.0.0`, and the **[master]** branch does no longer support `@angular v2.x.x`.
 
-However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions (*especially `@angular/router v2.4.8`*) contain outdated dependencies, might produce errors.
+However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might produce errors (*especially `@angular/router v2.4.8`*).
 
 - If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 - If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
@@ -64,6 +106,8 @@ npm install @nglibs/i18n-router --save
 - [@nglibs/meta]
 - [@nglibs/i18n-router]
 - [@nglibs/i18n-router-config-loader]
+- [@nglibs/universal-express-engine]
+- [@nglibs/universal-transfer-state]
 
 ### Adding `@nglibs/i18n-router` to your project (SystemJS)
 Add `map` for **`@nglibs/i18n-router`** in your `systemjs.config`
@@ -634,6 +678,8 @@ Copyright (c) 2017 [Burak Tasci]
 [@nglibs/meta]: https://github.com/nglibs/meta
 [@nglibs/i18n-router]: https://github.com/nglibs/i18n-router
 [@nglibs/i18n-router-config-loader]: https://github.com/nglibs/i18n-router-config-loader
+[@nglibs/universal-express-engine]: https://github.com/nglibs/universal-express-engine
+[@nglibs/universal-transfer-state]: https://github.com/nglibs/universal-transfer-state
 [ng-router-loader]: https://github.com/shlomiassaf/ng-router-loader
 [forRoot]: https://angular.io/docs/ts/latest/guide/ngmodule.html#!#core-for-root
 [AoT compilation]: https://angular.io/docs/ts/latest/cookbook/aot-compiler.html

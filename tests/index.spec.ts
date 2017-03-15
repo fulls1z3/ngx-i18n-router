@@ -4,7 +4,7 @@ import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, HttpModule } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import { Routes } from '@angular/router';
+import { Route, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 // module
@@ -109,28 +109,28 @@ export const testRoutes: Routes = [
 ];
 
 export const testTranslations = {
-  "en": {
-    "ROOT.ABOUT": 'about',
-    "ROOT.ABOUT.US": 'us',
-    "ROOT.ABOUT.BANANA": 'banana',
-    "ROOT.ABOUT.APPLE": 'apple',
-    "ROOT.ABOUT.APPLE.PEAR": 'pear',
-    "ROOT.ABOUT.PLUM": 'plum',
-    "CHANGE_LANGUAGE": 'change-language'
+  'en': {
+    'ROOT.ABOUT': 'about',
+    'ROOT.ABOUT.US': 'us',
+    'ROOT.ABOUT.BANANA': 'banana',
+    'ROOT.ABOUT.APPLE': 'apple',
+    'ROOT.ABOUT.APPLE.PEAR': 'pear',
+    'ROOT.ABOUT.PLUM': 'plum',
+    'CHANGE_LANGUAGE': 'change-language'
   },
-  "tr": {
-    "ROOT.ABOUT": 'hakkinda',
-    "ROOT.ABOUT.US": 'biz',
-    //"ROOT.ABOUT.BANANA": 'muz', // commented on purpose
-    "ROOT.ABOUT.APPLE": 'elma',
-    "ROOT.ABOUT.APPLE.PEAR": 'armut',
-    "ROOT.ABOUT.PLUM": 'erik',
-    "CHANGE_LANGUAGE": 'dil-secimi'
+  'tr': {
+    'ROOT.ABOUT': 'hakkinda',
+    'ROOT.ABOUT.US': 'biz',
+    // "ROOT.ABOUT.BANANA": 'muz', // commented on purpose
+    'ROOT.ABOUT.APPLE': 'elma',
+    'ROOT.ABOUT.APPLE.PEAR': 'armut',
+    'ROOT.ABOUT.PLUM': 'erik',
+    'CHANGE_LANGUAGE': 'dil-secimi'
   }
 };
 
 // test module configuration for each test
-export const testModuleConfig = (routes: Routes = [], moduleOptions?: Array<any>) => {
+export const testModuleConfig = (routes: Array<Route> = [], moduleOptions?: Array<any>) => {
   // reset the test environment before initializing it.
   TestBed.resetTestEnvironment();
 
