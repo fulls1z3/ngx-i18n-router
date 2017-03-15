@@ -39,14 +39,11 @@ To resolve this issue, it is **highly recommended** to use [ng-router-loader]. H
 - [License](#license)
 
 ## Prerequisites
-This package depends on `@angular v4.0.0`, and the **[master]** branch does no longer support `@angular v2.x.x`.
-
-However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions (*especially `@angular/router v2.4.8`*) contain outdated dependencies, might produce errors.
-
-- If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
-- If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
+This [v0.2.x] branch of **`@nglibs/i18n-router`** depends on `@angular v2.0.0` but it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might produce errors (*especially `@angular/router v2.4.8`*).
 
 Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
+
+> If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 
 ## Getting started
 ### Installation
