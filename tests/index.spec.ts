@@ -109,23 +109,23 @@ export const testRoutes: Routes = [
 ];
 
 export const testTranslations = {
-  "en": {
-    "ROOT.ABOUT": 'about',
-    "ROOT.ABOUT.US": 'us',
-    "ROOT.ABOUT.BANANA": 'banana',
-    "ROOT.ABOUT.APPLE": 'apple',
-    "ROOT.ABOUT.APPLE.PEAR": 'pear',
-    "ROOT.ABOUT.PLUM": 'plum',
-    "CHANGE_LANGUAGE": 'change-language'
+  'en': {
+    'ROOT.ABOUT': 'about',
+    'ROOT.ABOUT.US': 'us',
+    'ROOT.ABOUT.BANANA': 'banana',
+    'ROOT.ABOUT.APPLE': 'apple',
+    'ROOT.ABOUT.APPLE.PEAR': 'pear',
+    'ROOT.ABOUT.PLUM': 'plum',
+    'CHANGE_LANGUAGE': 'change-language'
   },
-  "tr": {
-    "ROOT.ABOUT": 'hakkinda',
-    "ROOT.ABOUT.US": 'biz',
-    //"ROOT.ABOUT.BANANA": 'muz', // commented on purpose
-    "ROOT.ABOUT.APPLE": 'elma',
-    "ROOT.ABOUT.APPLE.PEAR": 'armut',
-    "ROOT.ABOUT.PLUM": 'erik',
-    "CHANGE_LANGUAGE": 'dil-secimi'
+  'tr': {
+    'ROOT.ABOUT': 'hakkinda',
+    'ROOT.ABOUT.US': 'biz',
+    // "ROOT.ABOUT.BANANA": 'muz', // commented on purpose
+    'ROOT.ABOUT.APPLE': 'elma',
+    'ROOT.ABOUT.APPLE.PEAR': 'armut',
+    'ROOT.ABOUT.PLUM': 'erik',
+    'CHANGE_LANGUAGE': 'dil-secimi'
   }
 };
 
