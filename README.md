@@ -1,22 +1,64 @@
-# @nglibs/i18n-router [![Linux build](https://travis-ci.org/nglibs/i18n-router.svg?branch=master)](https://travis-ci.org/nglibs/i18n-router) [![Windows build](https://ci.appveyor.com/api/projects/status/github/nglibs/i18n-router?branch=master&svg=true)](https://ci.appveyor.com/project/nglibs/i18n-router) [![coverage](https://codecov.io/github/nglibs/i18n-router/coverage.svg?branch=master)](https://codecov.io/gh/nglibs/i18n-router) [![npm version](https://badge.fury.io/js/%40nglibs%2Fi18n-router.svg)](https://www.npmjs.com/package/@nglibs/i18n-router)
+# @nglibs/i18n-router [![Linux build](https://travis-ci.org/nglibs/i18n-router.svg?branch=v0.2.x)](https://travis-ci.org/nglibs/i18n-router) [![Windows build](https://ci.appveyor.com/api/projects/status/github/nglibs/i18n-router?branch=v0.2.x&svg=true)](https://ci.appveyor.com/project/nglibs/i18n-router) [![coverage](https://codecov.io/github/nglibs/i18n-router/coverage.svg?branch=v0.2.x)](https://codecov.io/gh/nglibs/i18n-router) [![npm version](https://badge.fury.io/js/%40nglibs%2Fi18n-router.svg)](https://www.npmjs.com/package/@nglibs/i18n-router)
 
 > This repository holds the TypeScript source code and distributable bundle of **`@nglibs/i18n-router`**, the route internationalization utility for **Angular**.
 
 **`@nglibs/i18n-router`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
 
+#### NOTICE
+
 > If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 
 > If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
 
-#### NOTICE
+#### WARNING
 
 **`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
 
 > `ERROR in Cannot read property 'loadChildren' of undefined`
 
-It happens because **`@angular-cli`** uses **`@ngtools/webpack`** for [AoT compilation], expecting `RouterModule.forChild(...)` to resolve lazy-loaded modules (*with `loadChildren`*), which is replaced by `I18NRouterModule.forChild(...)` - providing routes for **feature modules** instead.
+This issue is caused by the `ngtools_impl` located in the package `@angular/compiler-cli`.
 
-To resolve this issue, it is **highly recommended** to use [ng-router-loader]. Hence **`@angular-cli`** doesn't allow **modifying** the **webpack configuration**, you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+The **`@ngtools/webpack`** forces routes to be *static*, to facilitate code splitting (*for lazy-loaded modules*) by webpack. However, **route providing** by `useFactory` are not supported. You can track the actual status of this issue at the following URLs:
+
+- https://github.com/nglibs/i18n-router/issues/2
+- https://github.com/angular/angular/issues/15305
+
+On the other hand, the [ng-router-loader] (together with `awesome-typescipt-loader`) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+
+If you really need to stick to **`@angular-cli`**, you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
+
+- **Method name:** `_collectRoutes`
+- **Line number:** 139
+- **Replacement:** comment the line containing `return routeList.concat(p.useValue);`, and replace with:
+```JavaScript
+if (p.useFactory != null) {
+  return routeList.concat(p.useFactory);
+} else {
+  return routeList.concat(p.useValue);
+}
+```
+
+#### [ngtools_impl.js](https://gist.github.com/fulls1z3/ca7541eeccc5b195f4854ff39d322d0e#file-ngtools_impl-js-L138)
+```JavaScript
+function _collectRoutes(providers, reflector, ROUTES) {
+  return providers.reduce(function (routeList, p) {
+    if (p.provide === ROUTES) {
+      // return routeList.concat(p.useValue);
+      if (p.useFactory != null) {
+        return routeList.concat(p.useFactory);
+      } else {
+        return routeList.concat(p.useValue);
+      }
+    }
+    else if (Array.isArray(p)) {
+      return routeList.concat(_collectRoutes(p, reflector, ROUTES));
+    }
+    else {
+      return routeList;
+    }
+  }, []);
+}
+```
 
 ## Table of contents:
 - [Prerequisites](#prerequisites)
