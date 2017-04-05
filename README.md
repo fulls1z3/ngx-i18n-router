@@ -1,5 +1,7 @@
 # @nglibs/i18n-router [![Linux build](https://travis-ci.org/nglibs/i18n-router.svg?branch=v0.2.x)](https://travis-ci.org/nglibs/i18n-router) [![Windows build](https://ci.appveyor.com/api/projects/status/github/nglibs/i18n-router?branch=v0.2.x&svg=true)](https://ci.appveyor.com/project/nglibs/i18n-router) [![coverage](https://codecov.io/github/nglibs/i18n-router/coverage.svg?branch=v0.2.x)](https://codecov.io/gh/nglibs/i18n-router) [![npm version](https://badge.fury.io/js/%40nglibs%2Fi18n-router.svg)](https://www.npmjs.com/package/@nglibs/i18n-router)
 
+> Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
+
 > This repository holds the TypeScript source code and distributable bundle of **`@nglibs/i18n-router`**, the route internationalization utility for **Angular**.
 
 **`@nglibs/i18n-router`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
@@ -10,55 +12,7 @@
 
 > If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
 
-#### WARNING
-
-**`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
-
-> `ERROR in Cannot read property 'loadChildren' of undefined`
-
-This issue is caused by the `ngtools_impl` located in the package `@angular/compiler-cli`.
-
-The **`@ngtools/webpack`** forces routes to be *static*, to facilitate code splitting (*for lazy-loaded modules*) by webpack. However, **route providing** by `useFactory` are not supported. You can track the actual status of this issue at the following URLs:
-
-- https://github.com/nglibs/i18n-router/issues/2
-- https://github.com/angular/angular/issues/15305
-
-On the other hand, the [ng-router-loader] (together with `awesome-typescipt-loader`) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
-
-If you really need to stick to **`@angular-cli`**, you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
-
-- **Method name:** `_collectRoutes`
-- **Line number:** 139
-- **Replacement:** comment the line containing `return routeList.concat(p.useValue);`, and replace with:
-```JavaScript
-if (p.useFactory != null) {
-  return routeList.concat(p.useFactory);
-} else {
-  return routeList.concat(p.useValue);
-}
-```
-
-#### [ngtools_impl.js](https://gist.github.com/fulls1z3/ca7541eeccc5b195f4854ff39d322d0e#file-ngtools_impl-js-L138)
-```JavaScript
-function _collectRoutes(providers, reflector, ROUTES) {
-  return providers.reduce(function (routeList, p) {
-    if (p.provide === ROUTES) {
-      // return routeList.concat(p.useValue);
-      if (p.useFactory != null) {
-        return routeList.concat(p.useFactory);
-      } else {
-        return routeList.concat(p.useValue);
-      }
-    }
-    else if (Array.isArray(p)) {
-      return routeList.concat(_collectRoutes(p, reflector, ROUTES));
-    }
-    else {
-      return routeList;
-    }
-  }, []);
-}
-```
+> Also, please check the [Workaround for '@ngtools/webpack'](#workaround-for-ngtoolswebpack) section if your app depends on **@angular-cli** or **`@ngtools/webpack`** for [AoT compilation].
 
 ## Table of contents:
 - [Prerequisites](#prerequisites)
@@ -77,6 +31,7 @@ function _collectRoutes(providers, reflector, ROUTES) {
 	- [Translations object](#translations-object)
 - [Change language (runtime)](#change-language-runtime)
 - [Pipe](#pipe)
+- [Workaround for '@ngtools/webpack'](#workaround-for-ngtoolswebpack)
 - [Credits](#credits)
 - [License](#license)
 
@@ -95,7 +50,7 @@ npm install @nglibs/i18n-router --save
 ```
 
 ### Examples
-- [@nglibs/example-app] is an officially maintained example application showcasing best practices for **[@nglibs]** utilities.
+- [@nglibs/universal-example-app] and [@nglibs/example-app] are officially maintained example applications showcasing best practices for **[@nglibs]** utilities.
 
 ### `@nglibs` packages
 
@@ -659,6 +614,56 @@ Example for Turkish language and link to 'about':
 ['about'] | i18nRouter -> '/tr/hakkinda'
 ```
 
+## Workaround for '@ngtools/webpack'
+
+**`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
+
+> `ERROR in Cannot read property 'loadChildren' of undefined`
+
+This issue is caused by the `ngtools_impl` located in the package `@angular/compiler-cli`.
+
+The **`@ngtools/webpack`** forces routes to be *static*, to facilitate code splitting (*for lazy-loaded modules*) by webpack. However, **route providing** by `useFactory` are not supported. You can track the actual status of this issue at the following URLs:
+
+- https://github.com/nglibs/i18n-router/issues/2
+- https://github.com/angular/angular/issues/15305
+
+On the other hand, the [ng-router-loader] (together with `awesome-typescipt-loader`) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+
+If you really need to stick to **`@angular-cli`**, you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
+
+- **Method name:** `_collectRoutes`
+- **Line number:** 139
+- **Replacement:** comment the line containing `return routeList.concat(p.useValue);`, and replace with:
+```JavaScript
+if (p.useFactory != null) {
+  return routeList.concat(p.useFactory);
+} else {
+  return routeList.concat(p.useValue);
+}
+```
+
+#### [ngtools_impl.js](https://gist.github.com/fulls1z3/ca7541eeccc5b195f4854ff39d322d0e#file-ngtools_impl-js-L138)
+```JavaScript
+function _collectRoutes(providers, reflector, ROUTES) {
+  return providers.reduce(function (routeList, p) {
+    if (p.provide === ROUTES) {
+      // return routeList.concat(p.useValue);
+      if (p.useFactory != null) {
+        return routeList.concat(p.useFactory);
+      } else {
+        return routeList.concat(p.useValue);
+      }
+    }
+    else if (Array.isArray(p)) {
+      return routeList.concat(_collectRoutes(p, reflector, ROUTES));
+    }
+    else {
+      return routeList;
+    }
+  }, []);
+}
+```
+
 ## Credits
 - [localize-router](https://github.com/Greentube/localize-router): An implementation of routes localization for Angular 2
 
@@ -671,6 +676,7 @@ Copyright (c) 2017 [Burak Tasci]
 [master]: https://github.com/nglibs/i18n-router/tree/master
 [v0.2.x]: https://github.com/nglibs/i18n-router/tree/v0.2.x
 [@nglibs/example-app]: https://github.com/nglibs/example-app
+[@nglibs/universal-example-app]: https://github.com/nglibs/universal-example-app
 [@nglibs/config]: https://github.com/nglibs/config
 [@nglibs/meta]: https://github.com/nglibs/meta
 [@nglibs/i18n-router]: https://github.com/nglibs/i18n-router

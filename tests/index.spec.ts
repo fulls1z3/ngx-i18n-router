@@ -1,9 +1,9 @@
 // angular
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, HttpModule } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
