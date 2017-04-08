@@ -44,7 +44,7 @@ export class I18NRouterService {
     this.languageCode = languageCode;
 
     const rawRoutes = this.loader.getRoutes();
-    const i18nRoot = _.find(rawRoutes, (route) => (!!route.data && !!(<any>route.data).i18n) && (<any>route.data).i18n.isRoot);
+    const i18nRoot = _.find(rawRoutes, (route) => _.get(route, 'data.i18n.isRoot', undefined));
 
     let routes: Routes = [];
 
@@ -67,10 +67,7 @@ export class I18NRouterService {
   getTranslation(key: string): string {
     key = key.replace(/-/, '_');
 
-    if (!this.translations[this.languageCode][key.toUpperCase()])
-      return undefined;
-
-    return this.translations[this.languageCode][key.toUpperCase()];
+    return _.get(this.translations, `${this.languageCode}.${key.toUpperCase()}`, undefined);
   }
 
   translateRoutes(routes: Routes, moduleKey: string = ''): Routes {
@@ -78,7 +75,7 @@ export class I18NRouterService {
 
     routes.forEach((route: Route) => {
       if (_.isArray(route.children)) {
-        if ((!!route.data && !!(<any>route.data).i18n) && (<any>route.data).i18n.isRoot)
+        if (_.get(route, 'data.i18n.isRoot', false))
           route.path = this.interpolateRoute(route.path);
         else {
           if (!!route.path)
