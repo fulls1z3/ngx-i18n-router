@@ -1,10 +1,10 @@
 {
-  "name": "@nglibs/i18n-router",
+  "name": "@ngx-i18n-router/core",
   "version": "0.4.0-beta.1",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nglibs/i18n-router.git"
+    "url": "https://github.com/ngx-i18n-router/core.git"
   },
   "keywords": [
     "lazy loading",
@@ -22,13 +22,13 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nglibs/i18n-router/issues"
+    "url": "https://github.com/ngx-i18n-router/core/issues"
   },
-  "homepage": "https://github.com/nglibs/i18n-router#readme",
+  "homepage": "https://github.com/ngx-i18n-router/core#readme",
   "scripts": {
     "test": "karma start"
   },
-  "main": "bundles/i18n-router.umd.min.js",
+  "main": "bundles/core.umd.min.js",
   "module": "index.js",
   "typings": "index.d.ts",
   "dependencies": {

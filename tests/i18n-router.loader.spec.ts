@@ -19,7 +19,7 @@ const mockBackendError = (connection: MockConnection, error: string) => {
   connection.mockError(new Error(error));
 };
 
-describe('@nglibs/i18n-router:',
+describe('@ngx-i18n-router/core:',
   () => {
     beforeEach(() => {
       const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
