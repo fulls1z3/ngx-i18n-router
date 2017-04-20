@@ -60,10 +60,10 @@ module.exports = {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-filename
      */
-    filename: 'i18n-router.umd.min.js',
+    filename: 'core.umd.min.js',
 
     libraryTarget: 'umd',
-    library: 'i18n-router'
+    library: 'ngx-i18n-router'
   },
 
   /**

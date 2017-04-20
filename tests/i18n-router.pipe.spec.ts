@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { I18NRouterLoader, I18NRouterStaticLoader, I18NRouterPipe, I18NRouterService } from '../index';
 import { testRoutes, testTranslations, testModuleConfig } from './index.spec';
 
-describe('@nglibs/i18n-router:',
+describe('@ngx-i18n-router/core:',
   () => {
     beforeEach(() => {
       const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
