@@ -1,9 +1,9 @@
 // angular
 import {
-  ANALYZE_FOR_ENTRY_COMPONENTS, APP_INITIALIZER, Inject, NgModule, ModuleWithProviders, InjectionToken, Optional,
+  ANALYZE_FOR_ENTRY_COMPONENTS, APP_INITIALIZER, Inject, InjectionToken, ModuleWithProviders, NgModule, Optional,
   SkipSelf
 } from '@angular/core';
-import { provideRoutes, RouterModule, Router, Routes, ROUTES } from '@angular/router';
+import { provideRoutes, Router, RouterModule, Routes, ROUTES } from '@angular/router';
 
 // module
 import { I18NRouterLoader, I18NRouterStaticLoader } from './src/i18n-router.loader';
@@ -15,7 +15,7 @@ export * from './src/i18n-router.pipe';
 export * from './src/i18n-router.service';
 
 export const RAW_ROUTES = new InjectionToken('RAW_ROUTES');
-export const I18N_ROUTER_PROVIDERS: any[] = [
+export const I18N_ROUTER_PROVIDERS: Array<any> = [
   I18NRouterService
 ];
 
@@ -27,6 +27,7 @@ export function i18nRouterFactory(routes: Routes): I18NRouterLoader {
 export function initializerFactory(loader: I18NRouterLoader): any {
   // workaround for AoT compilation
   const res = () => loader.loadTranslations();
+
   return res;
 }
 
@@ -103,6 +104,7 @@ export class I18NRouterModule {
   }
 
   constructor(@Optional() @Inject(I18N_ROUTER_FORROOT_GUARD) guard: any) {
+    // inject token
   }
 }
 

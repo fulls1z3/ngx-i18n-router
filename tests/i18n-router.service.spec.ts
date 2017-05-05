@@ -3,8 +3,8 @@ import { fakeAsync, getTestBed, inject, TestBed } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 
 // module
-import { I18NRouterLoader, I18NRouterStaticLoader, I18NRouterService } from '../index';
-import { TestBootstrapComponent, TestComponent, testRoutes, testTranslations, testModuleConfig } from './index.spec';
+import { I18NRouterLoader, I18NRouterService, I18NRouterStaticLoader } from '../index';
+import { TestBootstrapComponent, TestComponent, testModuleConfig, testRoutes, testTranslations } from './index.spec';
 
 describe('@ngx-i18n-router/core:',
   () => {
@@ -183,11 +183,11 @@ describe('@ngx-i18n-router/core:',
             ];
 
             const someTranslations = {
-              'en': {
+              en: {
                 'ROOT.HOME': 'home',
                 'ROOT.ABOUT': 'about'
               },
-              'tr': {
+              tr: {
                 'ROOT.HOME': 'ana-sayfa',
                 'ROOT.ABOUT': 'hakkinda'
               }
@@ -237,13 +237,13 @@ describe('@ngx-i18n-router/core:',
             ];
 
             const someTranslations = {
-              'en': {
-                'HOME': 'home',
-                'ABOUT': 'about'
+              en: {
+                HOME: 'home',
+                ABOUT: 'about'
               },
-              'tr': {
-                'HOME': 'ana-sayfa',
-                'ABOUT': 'hakkinda'
+              tr: {
+                HOME: 'ana-sayfa',
+                ABOUT: 'hakkinda'
               }
             };
 
