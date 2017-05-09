@@ -18,24 +18,24 @@ export class I18NRouterPipe implements PipeTransform {
               private readonly i18nRouter: I18NRouterService) {
   }
 
-  transform(query: string | Array<any>): string {
-    if (typeof query === 'string' && _.get(query, 'length', 0))
+  transform(value: string | Array<any>): string {
+    if (typeof value === 'string' && _.get(value, 'length', 0))
       throw new Error('Query must be an empty string or an array!');
 
     if (!this.i18nRouter.languageCode || !this.i18nRouter.useLocalizedRoutes)
-      return `/${typeof query === 'string' ? query : query.join('/')}`;
+      return `/${typeof value === 'string' ? value : value.join('/')}`;
 
-    if (_.get(query, 'length', 0) === 0)
+    if (_.get(value, 'length', 0) === 0)
       return `/${this.i18nRouter.languageCode}`;
 
-    return `/${this.translateQuery(query)}`;
+    return `/${this.translateQuery(value)}`;
   }
 
-  private translateQuery(key: string | Array<any>): string {
+  private translateQuery(value: string | Array<any>): string {
     const translateBatch: Array<any> = [];
     let batchKey = '';
 
-    (key as Array<any>).forEach((segment: any, index: number) => {
+    (value as Array<any>).forEach((segment: any, index: number) => {
       if (typeof segment === 'string') {
         let prefix = '';
 
