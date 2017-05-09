@@ -1,6 +1,6 @@
 {
   "name": "@ngx-i18n-router/core",
-  "version": "0.2.0-beta.4",
+  "version": "0.2.0-beta.5",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
