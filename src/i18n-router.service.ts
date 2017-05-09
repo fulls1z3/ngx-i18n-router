@@ -23,7 +23,7 @@ export class I18NRouterService {
     this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
   }
 
-  init(useLocalizedRoutes: boolean = true): void {
+  init(useLocalizedRoutes = true): void {
     // don't use i18n-router unless allowed
     if (!useLocalizedRoutes)
       return;
@@ -44,7 +44,7 @@ export class I18NRouterService {
     this.languageCode = languageCode;
 
     const rawRoutes = this.loader.getRoutes();
-    const i18nRoot = _.find(rawRoutes, (route) => _.get(route, 'data.i18n.isRoot', undefined));
+    const i18nRoot = _.find(rawRoutes, route => _.get(route, 'data.i18n.isRoot', undefined));
 
     let routes: Routes = [];
 
@@ -70,7 +70,7 @@ export class I18NRouterService {
     return _.get(this.translations, `${this.languageCode}.${key.toUpperCase()}`, undefined);
   }
 
-  translateRoutes(routes: Routes, moduleKey: string = ''): Routes {
+  translateRoutes(routes: Routes, moduleKey = ''): Routes {
     const translatedRoutes: Array<Route> = [];
 
     routes.forEach((route: Route) => {
@@ -83,10 +83,9 @@ export class I18NRouterService {
         }
 
         route.children = this.translateRoutes(route.children, moduleKey);
-      }
-      else if (!moduleKey && route.path === '**')
+      } else if (!moduleKey && route.path === '**') {
         route.redirectTo = this.interpolateRoute(route.redirectTo);
-      else {
+      } else {
         if (!!route.path)
           route = this.translateRoute(route, 'path', moduleKey);
 
@@ -109,11 +108,11 @@ export class I18NRouterService {
     return `${this.languageCode}/${path}`;
   }
 
-  private translateRoute(route: Route, property: string, moduleKey: string = ''): Route {
+  private translateRoute(route: Route, property: string, moduleKey = ''): Route {
     const translateBatch: Array<string> = [];
     let batchKey = '';
 
-    const key = _.filter(route[property].split('/'), (segment) => !!segment);
+    const key = _.filter(route[property].split('/'), segment => !!segment);
     const isRedirection = property === 'redirectTo' && _.startsWith(route[property], '/');
 
     (key as Array<string>).forEach((segment: any, index: number) => {
