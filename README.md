@@ -1,13 +1,13 @@
-# @nglibs/i18n-router [![Linux build](https://travis-ci.org/nglibs/i18n-router.svg?branch=master)](https://travis-ci.org/nglibs/i18n-router) [![Windows build](https://ci.appveyor.com/api/projects/status/github/nglibs/i18n-router?branch=master&svg=true)](https://ci.appveyor.com/project/nglibs/i18n-router) [![coverage](https://codecov.io/github/nglibs/i18n-router/coverage.svg?branch=master)](https://codecov.io/gh/nglibs/i18n-router) [![npm version](https://badge.fury.io/js/%40nglibs%2Fi18n-router.svg)](https://www.npmjs.com/package/@nglibs/i18n-router)
+# @ngx-i18n-router/core
+Route internationalization utility for **Angular**
+
+[![Linux build](https://travis-ci.org/ngx-i18n-router/core.svg?branch=master)](https://travis-ci.org/ngx-i18n-router/core) [![Windows build](https://ci.appveyor.com/api/projects/status/github/ngx-i18n-router/core?branch=master&svg=true)](https://ci.appveyor.com/project/ngx-i18n-router/core) [![coverage](https://codecov.io/github/ngx-i18n-router/core/coverage.svg?branch=master)](https://codecov.io/gh/ngx-i18n-router/core) [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
 
 > Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
 
-> This repository holds the TypeScript source code and distributable bundle of **`@nglibs/i18n-router`**, the route internationalization utility for **Angular**.
-
-**`@nglibs/i18n-router`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
+**`@ngx-i18n-router/core`** translates each `path` and `redirectTo` property of routes, during **Angular** app initialization and also during runtime - when the working language gets changed.
 
 #### NOTICE
-
 > If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 
 > If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
@@ -19,8 +19,9 @@
 - [Getting started](#getting-started)
   - [Installation](#installation)
 	- [Examples](#examples)
-	- [`@nglibs` packages](#nglibs-packages)
-	- [Adding `@nglibs/i18n-router` to your project (SystemJS)](#adding-nglibsi18n-router-to-your-project-systemjs)
+	- [Related packages](#related-packages)
+	- [Recommended packages](#recommended-packages)
+	- [Adding `@ngx-i18n-router/core` to your project (SystemJS)](#adding-ngx-i18n-routercore-to-your-project-systemjs)
 	- [Route configuration](#route-configuration)
   - [app.module configuration](#appmodule-configuration)
 	- [Feature modules configuration](#feature-modules-configuration)
@@ -28,6 +29,7 @@
 - [Settings](#settings)
 	- [Setting up `I18NRouterModule` to use `I18NRouterStaticLoader`](#setting-up-i18nroutermodule-to-use-i18nrouterstaticloader)
 	- [Setting up `I18NRouterModule` to use `I18NRouterHttpLoader`](#setting-up-i18nroutermodule-to-use-i18nrouterhttploader)
+	- [Setting up `I18NRouterModule` to use `I18NRouterConfigLoader`](#setting-up-i18nroutermodule-to-use-i18nrouterconfigloader)
 	- [Translations object](#translations-object)
 - [Change language (runtime)](#change-language-runtime)
 - [Pipe](#pipe)
@@ -36,10 +38,9 @@
 - [License](#license)
 
 ## Prerequisites
-This package depends on `@angular v4.0.0`, and the **[master]** branch does no longer support `@angular v2.x.x`.
+This package depends on `@angular v4.0.0`, and the [master] branch does no longer support `@angular v2.x.x`.
 
-However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might produce errors (*especially `@angular/router v2.4.8`*).
-
+However, the [v0.2.x] branch keeps ongoing support for `@angular v2.x.x` - depending on `@angular v2.0.0`, and it's highly recommended that you are running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might produce errors.
 - If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 - If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
 
@@ -47,31 +48,32 @@ Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
 
 ## Getting started
 ### Installation
-You can install **`@nglibs/i18n-router`** using `npm`
+You can install **`@ngx-i18n-router/core`** using `npm`
 ```
-npm install @nglibs/i18n-router --save
+npm install @ngx-i18n-router/core --save
 ```
 
 ### Examples
-- [@nglibs/universal-example-app] and [@nglibs/example-app] are officially maintained example applications showcasing best practices for **[@nglibs]** utilities.
+- [ng-seed/universal] and [ng-seed/spa] are officially maintained seed projects, showcasing common patterns and best practices for **`@ngx-i18n-router/core`**.
 
-### `@nglibs` packages
+### Related packages
+The following packages may be used in conjunction with **`@ngx-i18n-router/core`**
+- [@ngx-i18n-router/http-loader]
+- [@ngx-i18n-router/config-loader]
 
-- [@nglibs/config]
-- [@nglibs/meta]
-- [@nglibs/i18n-router]
-- [@nglibs/i18n-router-config-loader]
-- [@nglibs/universal-express-engine]
-- [@nglibs/universal-transfer-state]
+### Recommended packages
+The following package(s) have no dependency for **`@ngx-i18n-router/core`**, however may provide supplementary/shorthand functionality:
+- [@ngx-config/core]: provides route translations from the application settings loaded during application initialization
+- [@ngx-cache/core]: provides caching features to retrieve the route translations using `non-static loaders` (`http`, `fs`, etc.)
 
-### Adding `@nglibs/i18n-router` to your project (SystemJS)
-Add `map` for **`@nglibs/i18n-router`** in your `systemjs.config`
+### Adding `@ngx-i18n-router/core` to your project (SystemJS)
+Add `map` for **`@ngx-i18n-router/core`** in your `systemjs.config`
 ```javascript
-'@nglibs/i18n-router': 'node_modules/@nglibs/i18n-router/bundles/i18n-router.umd.min.js'
+'@ngx-i18n-router/core': 'node_modules/@ngx-i18n-router/core/bundles/core.umd.min.js'
 ```
 
 ### Route configuration
-In order to use **`@nglibs/i18n-router`** properly, you should have more or less a similar **route structure** as follows:
+In order to use **`@ngx-i18n-router/core`** properly, you should have more or less a similar **route structure** as follows:
 
 #### app.routes.ts
 ```TypeScript
@@ -113,10 +115,9 @@ export const routes: Routes = [
 ```
 
 #### I18N-ROOT
-
 The route configuration above shows that, one of the routes contains `i18n` property inside the `data` property.
 
-When its value is set to `true`, **`@nglibs/i18n-router`** will **prepend** descendants of this route with the **2-letter language code** (*ex: `en`/`fr`/`de`/`nl`/`tr`*).
+When its value is set to `true`, **`@ngx-i18n-router/core`** will **prepend** descendants of this route with the **2-letter language code** (*ex: `en`/`fr`/`de`/`nl`/`tr`*).
 
 > We call this route, with `data` property containing `i18n\isRoot` set to `true`, **`I18N-ROOT`** of **Angular** application.
 
@@ -131,7 +132,6 @@ http://mysite.com/about -> http://mysite.com/en/about
 **Note**: It is always a good practice to have **exactly one route** (*and component*) in the `Home` feature module, with a path set to `''` (*see `home.routes.ts` in this readme*).
 
 #### Non-prefixed routes
-
 Routes outside **`I18N-ROOT`** scope will **NOT** have this **2-letter language code** prefix. It allows the **Angular** application to support both `prefixed` and `non-prefixed` routes. 
 
 ```
@@ -143,11 +143,10 @@ http://mysite.com/admin
 ```
 
 #### Catchall route
-
-There must be a **catchall route** in the route configuration, redirecting to the **`I18N-ROOT`** of the app (*here, redirects to `''`*). The `redirectTo` property will be reset to the **2-letter language code** by **`@nglibs/i18n-router`**.
+There must be a **catchall route** in the route configuration, redirecting to the **`I18N-ROOT`** of the app (*here, redirects to `''`*). The `redirectTo` property will be reset to the **2-letter language code** by **`@ngx-i18n-router/core`**.
 
 ### app.module configuration
-Import `I18NRouterModule` using the mapping `'@nglibs/i18n-router'` and append `I18NRouterModule.forRoot(routes, {...})` within the imports property of **app.module** (*considering the app.module is the core module in Angular application*).
+Import `I18NRouterModule` using the mapping `'@ngx-i18n-router/core'` and append `I18NRouterModule.forRoot(routes, {...})` within the imports property of **app.module** (*considering the app.module is the core module in Angular application*).
 
 Also, don't forget to provide `I18N_ROUTER_PROVIDERS` within the providers property of **app.module**.
 
@@ -156,7 +155,7 @@ Also, don't forget to provide `I18N_ROUTER_PROVIDERS` within the providers prope
 #### app.module.ts
 ```TypeScript
 ...
-import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@nglibs/i18n-router';
+import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@ngx-i18n-router/core';
 ...
 
 @NgModule({
@@ -164,15 +163,16 @@ import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@nglibs/i18n-router';
     AppComponent,
     ...
   ],
+  ...
   imports: [
     RouterModule.forRoot(routes),
-	I18NRouterModule.forRoot(routes),
+    I18NRouterModule.forRoot(routes),
     ...
   ],
   ...
   providers: [
     I18N_ROUTER_PROVIDERS,
-	...
+    ...
   ],
   ...
   bootstrap: [AppComponent]
@@ -180,8 +180,7 @@ import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@nglibs/i18n-router';
 ```
 
 ### Feature modules configuration
-
-Import `I18NRouterModule` using the mapping `'@nglibs/i18n-router'` and append `I18NRouterModule.forChild(routes, moduleKey)` within the imports property of the **feature module**. The `moduleKey` parameter for the `forChild` method obviously refers to the **module's root path** (*in kebab-case*).
+Import `I18NRouterModule` using the mapping `'@ngx-i18n-router/core'` and append `I18NRouterModule.forChild(routes, moduleKey)` within the imports property of the **feature module**. The `moduleKey` parameter for the `forChild` method obviously refers to the **module's root path** (*in kebab-case*).
 
 #### home.routes.ts
 ```TypeScript
@@ -196,7 +195,7 @@ export const routes: Routes = [
 #### home.module.ts
 ```TypeScript
 ...
-import { I18NRouterModule } from '@nglibs/i18n-router';
+import { I18NRouterModule } from '@ngx-i18n-router/core';
 ...
 
 @NgModule({
@@ -235,7 +234,7 @@ export const routes: Routes = [
 #### about.module.ts
 ```TypeScript
 ...
-import { I18NRouterModule } from '@nglibs/i18n-router';
+import { I18NRouterModule } from '@ngx-i18n-router/core';
 ...
 
 @NgModule({
@@ -249,19 +248,19 @@ import { I18NRouterModule } from '@nglibs/i18n-router';
 })
 ```
 
-**Note**: You must comment (*or better delete*) the line with `RouterModule.forChild(routes)`, in order to get **`@nglibs/i18n-router`** working. `forChild` method of `I18NRouterModule` provides routes for **feature modules** itself (*if imports both `RouterModule` and `I18NRouterModule`, it will cause `@nglibs/i18n-router` to malfunction, even crash*).
+**Note**: You must comment (*or better delete*) the line with `RouterModule.forChild(routes)`, in order to get **`@ngx-i18n-router/core`** working. `forChild` method of `I18NRouterModule` provides routes for **feature modules** itself (*if imports both `RouterModule` and `I18NRouterModule`, it will cause **`@ngx-i18n-router/core`** to malfunction, even crash*).
 
 ### app.component configuration
-Import `I18NRouterService` using the mapping `'@nglibs/i18n-router'` and **inject** it in the constructor of **app.component** (*considering the app.component is the bootstrap component in Angular application*).
+Import `I18NRouterService` using the mapping `'@ngx-i18n-router/core'` and **inject** it in the constructor of **app.component** (*considering the app.component is the bootstrap component in Angular application*).
 
-Then, invoke the `init` method to fetch **route translations** loaded during application initalization and allow the use of `'@nglibs/i18n-router'` by the **Angular** app.
+Then, invoke the `init` method to fetch **route translations** loaded during application initialization and allow the use of **`@ngx-i18n-router/core`** by the **Angular** app.
 
 Lastly, you need to invoke the `changeLanguage` method by supplying the **2-letter language code**, which translates routes to the specified language.
 
 #### app.component.ts
 ```TypeScript
 ...
-import { I18NRouterService } from '@nglibs/i18n-router';
+import { I18NRouterService } from '@ngx-i18n-router/core';
 ...
 
 @Component({
@@ -271,7 +270,7 @@ export class AppComponent implements OnInit {
   ...
   constructor(private readonly i18nRouter: I18NRouterService) {
     // invoking the `init` method with false won't allow the use of i18n-router,
-	// would be handy in the case you need to use i18n-router programmatically
+    // would be handy in the case you need to use i18n-router programmatically
     i18nRouter.init();
   }
   ...
@@ -283,8 +282,7 @@ export class AppComponent implements OnInit {
 ```
 
 ## Settings
-
-You can call the [forRoot] static method using `I18NRouterStaticLoader`. By default, it is configured to pass the **routes** to **`@nglibs/i18n-router`** and have no translations.
+You can call the [forRoot] static method using `I18NRouterStaticLoader`. By default, it is configured to pass the **routes** to **`@ngx-i18n-router/core`** and have no translations.
 
 > You can customize this behavior (*and ofc other settings*) by supplying **route translations** to `I18NRouterStaticLoader`.
 
@@ -292,16 +290,15 @@ If you provide route translations using a `JSON` file or an `API`, you can call 
 
 > You can customize this behavior (and ofc other settings) by supplying a **file path/api endpoint** to I18NRouterHttpLoader.
 
-You can also use the **[@nglibs/i18n-router-config-loader]**, to **reduce** the **amount** of `HTTP` requests during application initalization, by including **route translations** within the **application settings** - if [@nglibs/config] is already used to retrieve settings by the **Angular** app.
+You can also use the [@ngx-i18n-router/config-loader], to **reduce** the **amount** of `HTTP` requests during application initalization, by including **route translations** within the **application settings** - if [@ngx-config/core] is already used to retrieve settings by the **Angular** app.
 
 The following examples show the use of an exported function (*instead of an inline function*) for [AoT compilation].
 
 ### Setting up `I18NRouterModule` to use `I18NRouterStaticLoader`
-
 #### app.module.ts
 ```TypeScript
 ...
-import { I18NRouterModule, I18NRouterLoader, I18NRouterStaticLoader, I18N_ROUTER_PROVIDERS, RAW_ROUTES } from '@nglibs/i18n-router';
+import { I18NRouterModule, I18NRouterLoader, I18NRouterStaticLoader, I18N_ROUTER_PROVIDERS, RAW_ROUTES } from '@ngx-i18n-router/core';
 ...
 
 export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
@@ -332,10 +329,15 @@ export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
     AppComponent,
     ...
   ],
+  ...
   imports: [
     RouterModule.forRoot(routes),
     I18NRouterModule.forRoot(routes, [
-      { provide: I18NRouterLoader, useFactory: (i18nRouterFactory), deps: [RAW_ROUTES] }
+      {
+        provide: I18NRouterLoader,
+        useFactory: (i18nRouterFactory),
+        deps: [RAW_ROUTES]
+      }
     ]),
     ...
   ],
@@ -350,83 +352,27 @@ export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
 ```
 
 `I18NRouterStaticLoader` has two parameters:
-
 - **routes**: `Routes`: raw routes
 - **translations**: `any` : route translations
 
 ### Setting up `I18NRouterModule` to use `I18NRouterHttpLoader`
+If you provide route translations using a `JSON` file or an `API`, you can call the [forRoot] static method using the `I18NRouterHttpLoader`. By default, it is configured to retrieve **route translations** from the endpoint `/routes.json` (*if not specified*).
 
-#### routes.json
-```json
-{
-  "en": {
-    "ROOT.ABOUT": "about",
-    "ROOT.ABOUT.US": "us",
-    "ROOT.ABOUT.BANANA": "banana",
-    "ROOT.ABOUT.APPLE": "apple",
-    "ROOT.ABOUT.APPLE.PEAR": "pear",
-    "CHANGE_LANGUAGE": "change-language"
-  },
-  "tr": {
-    "ROOT.ABOUT": "hakkinda",
-    "ROOT.ABOUT.US": "biz",
-    "ROOT.ABOUT.BANANA": "muz",
-    "ROOT.ABOUT.APPLE": "elma",
-    "ROOT.ABOUT.APPLE.PEAR": "armut",
-    "CHANGE_LANGUAGE": "dil-secimi"
-  }
-}
-```
+> You can customize this behavior (*and ofc other settings*) by supplying a **api endpoint** to `I18NRouterHttpLoader`.
 
-#### app.module.ts
-```TypeScript
-...
-import { Http } from '@angular/http';
-import { I18NRouterModule, I18NRouterLoader, I18NRouterHttpLoader, I18N_ROUTER_PROVIDERS, RAW_ROUTES } from '@nglibs/i18n-router';
-...
+You can find detailed information about the usage guidelines for the `ConfigHttpLoader` [here](https://github.com/ngx-i18n-router/http-loader).
 
-export function i18nRouterFactory(http: Http, rawRoutes: Routes): I18NRouterLoader {
-  return new I18NRouterHttpLoader(http, rawRoutes, '/routes.json'); // FILE PATH || API ENDPOINT
-}
+### Setting up `I18NRouterModule` to use `I18NRouterConfigLoader`
+`I18NRouterConfigLoader` provides route translations to **`@ngx-i18n-router/core`** using **`@ngx-config/core`**.
 
-...
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    ...
-  ],
-  imports: [
-    RouterModule.forRoot(routes),
-    I18NRouterModule.forRoot(routes, [
-      { provide: I18NRouterLoader, useFactory: (i18nRouterFactory), deps: [Http, RAW_ROUTES] }
-    ]),
-    ...
-  ],
-  ...
-  providers: [
-    I18N_ROUTER_PROVIDERS,
-	...
-  ],
-  ...
-  bootstrap: [AppComponent]
-})
-```
-
-`I18NRouterHttpLoader` has three parameters:
-
-- **http**: `Http` : Http instance
-- **routes**: `Routes`: raw routes
-- **path**: `string` : path to `JSON file`/`API endpoint`, to retrieve route translations from (*by default, `routes.json`*)
+You can find detailed information about the usage guidelines for the `I18NRouterConfigLoader` [here](https://github.com/ngx-i18n-router/config-loader).
 
 ### Translations object
-
 The translations object is designed to contain **route translations** in every **language** supported by **Angular** application, in **JSON format**.
 
-When the `changeLanguage` method of `@nglibs\i18n-router` is invoked, **route configuration** is **reset** based on the supplied translations.
+When the `changeLanguage` method of **`@ngx-i18n-router/core`** is invoked, **route configuration** is **reset** based on the supplied translations.
 
 You should use the following **data structure** while working with the translation object:
-
 - Assume that there're a number of **{N}** supported languages. The object contains **{N}** times first-level children, **key**ed with its **2-letter language code** and **value**d by translations specific to that language.
 - Language keys are in **lowercase**.
 
@@ -547,32 +493,31 @@ routes:
 {
   "en": {
     "ROOT.ABOUT": "about",
-	"ROOT.CONTACT": "contact",
-	"ROOT.PROFILE": "profile",
-	"ROOT.PROFILE.EDIT": "edit",
-	"SITE_MAP": "site-map"
+    "ROOT.CONTACT": "contact",
+    "ROOT.PROFILE": "profile",
+    "ROOT.PROFILE.EDIT": "edit",
+    "SITE_MAP": "site-map"
   },
   "tr": {
     "ROOT.ABOUT": "iletisim",
-	"ROOT.CONTACT": "hakkimizda",
-	"ROOT.PROFILE": "profil",
-	"ROOT.PROFILE.EDIT": "duzenle",
-	"SITE_MAP": "site-haritasi"
+    "ROOT.CONTACT": "hakkimizda",
+    "ROOT.PROFILE": "profil",
+    "ROOT.PROFILE.EDIT": "duzenle",
+    "SITE_MAP": "site-haritasi"
   }
 }
 ```
 
-> :+1: Hooyah! It was quite a long story, but **`@nglibs/i18n-router`** will now translate each `path` and `redirectTo` property of routes.
+> :+1: Hooyah! It was quite a long story, but **`@ngx-i18n-router/core`** will now translate each `path` and `redirectTo` property of routes.
 
 ## Change language (runtime)
-
-Import `I18NRouterService` using the mapping `'@nglibs/i18n-router'` and **inject** it in the constructor of **change-language.component** (*considering the change-language.component changes the language in Angular application*).
+Import `I18NRouterService` using the mapping `'@ngx-i18n-router/core'` and **inject** it in the constructor of **change-language.component** (*considering the change-language.component changes the language in Angular application*).
 
 Then, invoke the `changeLanguage` method by supplying the **2-letter language code**, which translates routes to the destination language.
 
 ```TypeScript
 ...
-import { I18NRouterService } from '@nglibs/i18n-router';
+import { I18NRouterService } from '@ngx-i18n-router/core';
 ...
 
 @Component({
@@ -590,7 +535,7 @@ export class ChangeLanguageComponent implements OnInit {
 
       if (!!languageCode)
         // change language
-		this.i18nRouter.changeLanguage(languageCode);
+        this.i18nRouter.changeLanguage(languageCode);
 
       this.router.navigate(['/']);
     });
@@ -600,7 +545,6 @@ export class ChangeLanguageComponent implements OnInit {
 ```
 
 ## Pipe
-
 `I18nRouterPipe` is used to **prefix** and **translate** `routerLink` directive's content. Pipe can be appended **ONLY** to a single **empty string** in the `routerLink`'s definition or to an **entire array** element:
 
 ```Html
@@ -618,21 +562,21 @@ Example for Turkish language and link to 'about':
 ```
 
 ## Workaround for '@ngtools/webpack'
-
-**`@nglibs/i18n-router`** does not work with **`@angular-cli`** (*yet*), and giving the following error during [AoT compilation]:
+**`@ngx-i18n-router/core`**  does not work with [angular-cli] (*yet*), and giving the following error during [AoT compilation]:
 
 > `ERROR in Cannot read property 'loadChildren' of undefined`
 
+**`@ngx-i18n-router/core`**  injects routes with the `ROUTES` DI token using the `useFactory` property. However [@ngtools/webpack] forces routes to be *static*, and prevents code splitting (*for lazy-loaded modules*) by third parties.
+
 This issue is caused by the `ngtools_impl` located in the package `@angular/compiler-cli`.
 
-The **`@ngtools/webpack`** forces routes to be *static*, to facilitate code splitting (*for lazy-loaded modules*) by webpack. However, **route providing** by `useFactory` are not supported. You can track the actual status of this issue at the following URLs:
-
-- https://github.com/nglibs/i18n-router/issues/2
+You can track the actual status of this issue at the following URLs:
+- https://github.com/ngx-i18n-router/core/issues/2
 - https://github.com/angular/angular/issues/15305
 
-On the other hand, the [ng-router-loader] (together with `awesome-typescipt-loader`) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, webpack, etc*). You can use [@nglibs/example-app] as a **reference** (*which is an officially maintained example application showcasing best practices for [@nglibs] utilities*).
+On the other hand, the [ng-router-loader] (*together with [awesome-typescipt-loader]*) is safe to go with - it compiles without a problem. There's an overhead: you need to **manually** configure **build tools** (*dev/prod sever, task runners, [webpack], etc*).
 
-If you really need to stick to **`@angular-cli`**, you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
+If you really need to stick to [angular-cli], you can use the following workaround, by changing the contents of `/node_modules/@angular/compiler-cli/src/ngtools_impl.js` as described below:
 
 - **Method name:** `_collectRoutes`
 - **Line number:** 139
@@ -675,18 +619,19 @@ The MIT License (MIT)
 
 Copyright (c) 2017 [Burak Tasci]
 
-[@nglibs]: https://github.com/nglibs
-[master]: https://github.com/nglibs/i18n-router/tree/master
-[v0.2.x]: https://github.com/nglibs/i18n-router/tree/v0.2.x
-[@nglibs/example-app]: https://github.com/nglibs/example-app
-[@nglibs/universal-example-app]: https://github.com/nglibs/universal-example-app
-[@nglibs/config]: https://github.com/nglibs/config
-[@nglibs/meta]: https://github.com/nglibs/meta
-[@nglibs/i18n-router]: https://github.com/nglibs/i18n-router
-[@nglibs/i18n-router-config-loader]: https://github.com/nglibs/i18n-router-config-loader
-[@nglibs/universal-express-engine]: https://github.com/nglibs/universal-express-engine
-[@nglibs/universal-transfer-state]: https://github.com/nglibs/universal-transfer-state
+[master]: https://github.com/ngx-i18n-router/core/tree/master
+[v0.2.x]: https://github.com/ngx-i18n-router/core/tree/v0.2.x
+[ng-seed/universal]: https://github.com/ng-seed/universal
+[ng-seed/spa]: https://github.com/ng-seed/spa
+[@ngx-i18n-router/config-loader]: https://github.com/ngx-i18n-router/config-loader
+[@ngx-config/core]: https://github.com/ngx-config/core
+[@ngx-cache/core]: https://github.com/ngx-cache/core
 [ng-router-loader]: https://github.com/shlomiassaf/ng-router-loader
 [forRoot]: https://angular.io/docs/ts/latest/guide/ngmodule.html#!#core-for-root
+[angular-cli]: https://github.com/angular/angular-cli
 [AoT compilation]: https://angular.io/docs/ts/latest/cookbook/aot-compiler.html
-[Burak Tasci]: http://www.buraktasci.com
+[@ngtools/webpack]: https://www.npmjs.com/package/@ngtools/webpack
+[ng-router-loader]: https://github.com/shlomiassaf/ng-router-loader
+[awesome-typescipt-loader]: https://github.com/s-panferov/awesome-typescript-loader
+[webpack]: http://webpack.github.io
+[Burak Tasci]: https://github.com/fulls1z3
