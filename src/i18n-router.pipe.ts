@@ -1,6 +1,5 @@
 // angular
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { Router } from '@angular/router';
 
 // libs
 import * as _ from 'lodash';
@@ -14,8 +13,7 @@ import { I18NRouterService, ROOT_ROUTE_PREFIX } from './i18n-router.service';
   pure: false // required to update the value when the promise is resolved
 })
 export class I18NRouterPipe implements PipeTransform {
-  constructor(private readonly router: Router,
-              private readonly i18nRouter: I18NRouterService) {
+  constructor(private readonly i18nRouter: I18NRouterService) {
   }
 
   transform(value: string | Array<any>): string {

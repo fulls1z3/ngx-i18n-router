@@ -6,8 +6,8 @@ import { Routes } from '@angular/router';
 import * as _ from 'lodash';
 
 // module
-import { I18NRouterLoader, I18NRouterStaticLoader, I18NRouterService } from '../index';
-import { testRoutes, testTranslations, testModuleConfig } from './index.spec';
+import { I18NRouterLoader, I18NRouterService, I18NRouterStaticLoader } from '../index';
+import { testModuleConfig, testRoutes, testTranslations } from './index.spec';
 
 describe('@ngx-i18n-router/core:',
   () => {
@@ -53,7 +53,7 @@ describe('@ngx-i18n-router/core:',
           () => {
             class CustomLoader implements I18NRouterLoader {
               loadTranslations(): any {
-                return Promise.resolve({});
+                return (Promise.resolve({}));
               }
 
               getRoutes(): Routes {

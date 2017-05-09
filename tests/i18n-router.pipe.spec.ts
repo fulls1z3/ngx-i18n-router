@@ -3,8 +3,8 @@ import { inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 // module
-import { I18NRouterLoader, I18NRouterStaticLoader, I18NRouterPipe, I18NRouterService } from '../index';
-import { testRoutes, testTranslations, testModuleConfig } from './index.spec';
+import { I18NRouterLoader, I18NRouterPipe, I18NRouterService, I18NRouterStaticLoader } from '../index';
+import { testModuleConfig, testRoutes, testTranslations } from './index.spec';
 
 describe('@ngx-i18n-router/core:',
   () => {
@@ -22,7 +22,7 @@ describe('@ngx-i18n-router/core:',
         it('is defined',
           inject([Router, I18NRouterService],
             (router: Router, i18nRouter: I18NRouterService) => {
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               expect(I18NRouterPipe).toBeDefined();
               expect(pipe).toBeDefined();
@@ -35,7 +35,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init(false);
               i18nRouter.changeLanguage('tr');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               let translatedPath = pipe.transform('');
               expect(translatedPath).toEqual('/');
@@ -50,7 +50,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('fr');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               let translatedPath = pipe.transform('');
               expect(translatedPath).toEqual('/');
@@ -65,7 +65,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('en');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               expect(() => pipe.transform('about'))
                 .toThrowError('Query must be an empty string or an array!');
@@ -77,7 +77,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               const translatedPath = pipe.transform(['about', 'banana']);
               expect(translatedPath).toEqual('/tr/hakkinda/banana');
@@ -89,7 +89,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('en');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               const translatedPath = pipe.transform('');
               expect(translatedPath).toEqual('/en');
@@ -101,7 +101,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               let translatedPath = pipe.transform(['about', 'us']);
               expect(translatedPath).toEqual('/tr/hakkinda/biz');
@@ -116,7 +116,7 @@ describe('@ngx-i18n-router/core:',
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
 
-              const pipe = new I18NRouterPipe(router, i18nRouter);
+              const pipe = new I18NRouterPipe(i18nRouter);
 
               const translatedPath = pipe.transform(['change-language', 'en']);
               expect(translatedPath).toEqual('/dil-secimi/en');

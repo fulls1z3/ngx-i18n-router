@@ -8,7 +8,7 @@ import { Route, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 // module
-import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '../index';
+import { I18N_ROUTER_PROVIDERS, I18NRouterModule } from '../index';
 
 @Component({template: '<router-outlet></router-outlet>'})
 export class TestBootstrapComponent {
@@ -109,23 +109,23 @@ export const testRoutes: Routes = [
 ];
 
 export const testTranslations = {
-  'en': {
+  en: {
     'ROOT.ABOUT': 'about',
     'ROOT.ABOUT.US': 'us',
     'ROOT.ABOUT.BANANA': 'banana',
     'ROOT.ABOUT.APPLE': 'apple',
     'ROOT.ABOUT.APPLE.PEAR': 'pear',
     'ROOT.ABOUT.PLUM': 'plum',
-    'CHANGE_LANGUAGE': 'change-language'
+    CHANGE_LANGUAGE: 'change-language'
   },
-  'tr': {
+  tr: {
     'ROOT.ABOUT': 'hakkinda',
     'ROOT.ABOUT.US': 'biz',
     // "ROOT.ABOUT.BANANA": 'muz', // commented on purpose
     'ROOT.ABOUT.APPLE': 'elma',
     'ROOT.ABOUT.APPLE.PEAR': 'armut',
     'ROOT.ABOUT.PLUM': 'erik',
-    'CHANGE_LANGUAGE': 'dil-secimi'
+    CHANGE_LANGUAGE: 'dil-secimi'
   }
 };
 
@@ -147,7 +147,10 @@ export const testModuleConfig = (routes: Array<Route> = [], moduleOptions?: Arra
           useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
             return new Http(mockBackend, options);
           },
-          deps: [MockBackend, BaseRequestOptions]
+          deps: [
+            MockBackend,
+            BaseRequestOptions
+          ]
         },
         MockBackend,
         BaseRequestOptions,
