@@ -1,9 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## v0.2.0-beta.5 - 2017-05-09
+### Breaking change
+- `@nglibs/i18n-router` has been renamed to `@ngx-i18n-router/core` (closes [#8](https://github.com/ngx-i18n-router/core/issues/8))
+- separate `http` loader from the package (closes [#9](https://github.com/ngx-i18n-router/core/issues/9))
+
+### Fixed
+- Resolved add `yarn.lock` to npmignore (closes [#7](https://github.com/ngx-i18n-router/core/issues/7))
+
+### Changed
+- Updated README.md
+- Updated deps, gulp tasks, test config, ignorers, tslint
+- Some refactoring
+
 ## v0.2.0-beta.4 - 2017-03-15
 ### Fixed
-- Resolved depend on Angular 2.0.0 (closes [#3](https://github.com/nglibs/i18n-router/issues/3))
+- Resolved depend on Angular 2.0.0 (closes [#3](https://github.com/ngx-i18n-router/core/issues/3))
 - Limited to Angular 2.x.x (use v0.4.0 for Angular 4.x.x)
 - Workaround for AoT compilation
 

@@ -18,7 +18,7 @@ export class I18NRouterService {
   private readonly routes: Routes;
   private translations: any;
 
-  constructor(public loader: I18NRouterLoader,
+  constructor(public readonly loader: I18NRouterLoader,
               private readonly router: Router) {
     this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
   }
@@ -77,15 +77,13 @@ export class I18NRouterService {
       if (_.isArray(route.children)) {
         if (_.get(route, 'data.i18n.isRoot', false))
           route.path = this.interpolateRoute(route.path);
-        else {
-          if (!!route.path)
+        else if (!!route.path)
             route = this.translateRoute(route, 'path', moduleKey);
-        }
 
         route.children = this.translateRoutes(route.children, moduleKey);
-      } else if (!moduleKey && route.path === '**') {
+      } else if (!moduleKey && route.path === '**')
         route.redirectTo = this.interpolateRoute(route.redirectTo);
-      } else {
+      else {
         if (!!route.path)
           route = this.translateRoute(route, 'path', moduleKey);
 
