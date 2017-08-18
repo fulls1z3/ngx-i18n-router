@@ -12,22 +12,12 @@
     "lib": [ "es2015", "dom" ],
     "declaration": true,
     "typeRoots": [
-      "node_modules/@types"
+      "./node_modules/@types"
     ]
   },
-  "files": [
-    "index.ts",
-    "src/i18n-router.loader.ts",
-    "src/i18n-router.service.ts",
-    "src/i18n-router.pipe.ts"
-  ],
   "exclude": [
     "node_modules"
   ],
-  "angularCompilerOptions": {
-    "strictMetadataEmit": true,
-    "skipTemplateCodegen": true
-  },
   "compileOnSave": false,
   "buildOnSave": false
 }

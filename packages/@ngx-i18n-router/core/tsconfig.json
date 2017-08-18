@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.json",
+  "files": [
+    "./index.ts",
+    "./src/i18n-router.loader.ts",
+    "./src/i18n-router.service.ts",
+    "./src/i18n-router.pipe.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
+}
