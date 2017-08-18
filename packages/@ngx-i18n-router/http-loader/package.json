@@ -1,0 +1,51 @@
+{
+  "name": "@ngx-i18n-router/http-loader",
+  "version": "0.2.0-rc.1",
+  "description": "Loader for ngx-i18n-router that provides route translations using http",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fulls1z3/ngx-i18n-router.git"
+  },
+  "keywords": [
+    "lazy loading",
+    "localization",
+    "i18n",
+    "async",
+    "plugin",
+    "loader",
+    "http",
+    "localized router",
+    "router",
+    "i18n router",
+    "angular"
+  ],
+  "author": {
+    "name": "Burak Tasci",
+    "email": "me@fulls1z3.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fulls1z3/ngx-i18n-router/issues"
+  },
+  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.0/packages/@ngx-i18n-router/http-loader#readme",
+  "main": "./bundles/http-loader.umd.min.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "dependencies": {
+    "tslib": "^1.7.1"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "~2.4.0",
+    "lodash": "^4.17.4",
+    "@ngx-i18n-router/core": "~0.2.0-beta.5",
+    "@types/lodash": "4.14.55"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.0.0 || ^4.0.0",
+    "@angular/http": "^2.0.0 || ^4.0.0",
+    "@angular/router": "^3.0.0 || ^4.0.0",
+    "rxjs": "^5.0.1",
+    "lodash": "^4.17.4",
+    "@ngx-i18n-router/core": "~0.2.0-beta.5 || ~0.4.0-beta.2"
+  }
+}

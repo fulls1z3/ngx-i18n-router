@@ -1,0 +1,16 @@
+{
+  "@ngx-i18n-router": {
+    "core": {
+      "angularVersion": 2,
+      "runTests": true
+    },
+    "http-loader": {
+      "angularVersion": 2,
+      "runTests": true
+    },
+    "config-loader": {
+      "angularVersion": 2,
+      "runTests": true
+    }
+  }
+}
