@@ -9,26 +9,26 @@ import * as _ from 'lodash';
 import { I18NRouterLoader } from '@ngx-i18n-router/core';
 
 export class I18NRouterHttpLoader implements I18NRouterLoader {
-  private translations: any;
+  private _translations: any;
 
   constructor(private readonly http: Http,
-              private readonly routes?: Routes,
+              private readonly rawRoutes?: Routes,
               private readonly path: string = '/routes.json') {
+  }
+
+  get routes(): Routes {
+    return _.map(this.rawRoutes, _.cloneDeep);
+  }
+
+  get translations(): any {
+    return this._translations;
   }
 
   loadTranslations(): any {
     return this.http.get(this.path)
       .map((res: any) => res.json())
       .toPromise()
-      .then((translations: any) => this.translations = translations)
+      .then((translations: any) => this._translations = translations)
       .catch(() => Promise.reject('Endpoint unreachable!'));
-  }
-
-  getRoutes(): Routes {
-    return _.map(this.routes, _.cloneDeep);
-  }
-
-  getTranslations(): any {
-    return this.translations;
   }
 }
