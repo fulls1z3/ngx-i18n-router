@@ -9,7 +9,10 @@ import { TestBootstrapComponent, TestComponent, testModuleConfig, testRoutes, te
 describe('@ngx-i18n-router/core:',
   () => {
     beforeEach(() => {
-      const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
+      const i18nRouterFactory = () => new I18NRouterStaticLoader({
+        routes: testRoutes,
+        translations: testTranslations
+      });
 
       testModuleConfig(testRoutes, [{
         provide: I18NRouterLoader,
@@ -44,7 +47,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // initial navigation
               router.navigate(['/'])
                 .then(() => {
                   expect(router.url).toEqual('/');
@@ -75,7 +77,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // navigate to /about/banana
               router.navigate(['/tr/hakkinda/banana'])
                 .then(() => {
                   expect(router.url).toEqual('/tr/hakkinda/banana');
@@ -94,7 +95,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // catchall navigation
               router.navigate(['/about'])
                 .then(() => {
                   expect(router.url).toEqual('/en');
@@ -113,7 +113,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // navigate to /about
               router.navigate(['/tr/hakkinda'])
                 .then(() => {
                   expect(router.url).toEqual('/tr/hakkinda');
@@ -132,7 +131,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // redirection from /about/plum
               router.navigate(['/tr/hakkinda/erik'])
                 .then(() => {
                   expect(router.url).toEqual('/tr/hakkinda/banana');
@@ -151,7 +149,6 @@ describe('@ngx-i18n-router/core:',
               const fixture = TestBed.createComponent(TestBootstrapComponent);
               fixture.detectChanges();
 
-              // navigate to /change-language
               router.navigate(['/dil-secimi/en'])
                 .then(() => {
                   expect(router.url).toEqual('/dil-secimi/en');
@@ -193,7 +190,10 @@ describe('@ngx-i18n-router/core:',
               }
             };
 
-            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+            const i18nRouterFactory = () => new I18NRouterStaticLoader({
+              routes: someRoutes,
+              translations: someTranslations
+            });
 
             testModuleConfig(someRoutes, [{
               provide: I18NRouterLoader,
@@ -210,7 +210,6 @@ describe('@ngx-i18n-router/core:',
             const fixture = TestBed.createComponent(TestBootstrapComponent);
             fixture.detectChanges();
 
-            // navigate to /home
             router.navigate(['/tr/ana-sayfa'])
               .then(() => {
                 expect(router.url).toEqual('/tr/ana-sayfa');
@@ -247,7 +246,10 @@ describe('@ngx-i18n-router/core:',
               }
             };
 
-            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+            const i18nRouterFactory = () => new I18NRouterStaticLoader({
+              routes: someRoutes,
+              translations: someTranslations
+            });
 
             testModuleConfig(someRoutes, [{
               provide: I18NRouterLoader,
@@ -264,7 +266,6 @@ describe('@ngx-i18n-router/core:',
             const fixture = TestBed.createComponent(TestBootstrapComponent);
             fixture.detectChanges();
 
-            // navigate to /home
             router.navigate(['/ana-sayfa'])
               .then(() => {
                 expect(router.url).toEqual('/ana-sayfa');

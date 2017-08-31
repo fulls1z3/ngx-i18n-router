@@ -2,6 +2,7 @@
   "extends": "../../../tsconfig.json",
   "files": [
     "./index.ts",
+    "./src/models/i18n-router-settings.ts",
     "./src/i18n-router.loader.ts",
     "./src/i18n-router.service.ts",
     "./src/i18n-router.pipe.ts"
