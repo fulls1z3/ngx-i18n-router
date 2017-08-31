@@ -25,8 +25,8 @@ describe('@ngx-i18n-router/core:',
         it('should not return any routes & translations unless provided',
           () => {
             const loader = new I18NRouterStaticLoader();
-            const loadedRoutes = loader.getRoutes();
-            const loadedTranslations = loader.getTranslations();
+            const loadedRoutes = loader.routes;
+            const loadedTranslations = loader.translations;
 
             expect(loadedRoutes).toEqual([]);
             expect(loadedTranslations).toBeUndefined();
@@ -52,16 +52,16 @@ describe('@ngx-i18n-router/core:',
         it('should be able to provide any `I18NRouterLoader`',
           () => {
             class CustomLoader implements I18NRouterLoader {
-              loadTranslations(): any {
-                return (Promise.resolve({}));
-              }
-
-              getRoutes(): Routes {
+              get routes(): Routes {
                 return _.map(testRoutes, _.cloneDeep);
               }
 
-              getTranslations(): any {
+              get translations(): any {
                 return testTranslations;
+              }
+
+              loadTranslations(): any {
+                return (Promise.resolve({}));
               }
             }
 
