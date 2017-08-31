@@ -18,12 +18,12 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     .subscribe((connection: MockConnection) => {
       if (connection.request.url.endsWith('/config.json')
         && connection.request.method === RequestMethod.Get)
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              status: 200,
-              body: testSettings
-            })
-          ));
+        connection.mockRespond(new Response(
+          new ResponseOptions({
+            status: 200,
+            body: testSettings
+          })
+        ));
       else
         connection.mockError(new Error('500'));
     });

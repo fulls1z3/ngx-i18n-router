@@ -35,7 +35,8 @@ describe('@ngx-i18n-router/config-loader:',
   () => {
     beforeEach(() => {
       const configFactory = (http: Http) => new ConfigHttpLoader(http);
-      const i18nRouterFactory = (config: ConfigService, rawRoutes: Routes) => new I18NRouterConfigLoader(config, rawRoutes, 'routes');
+      const i18nRouterFactory = (config: ConfigService, rawRoutes: Routes) => new I18NRouterConfigLoader(config, 'routes',
+        {routes: rawRoutes});
 
       testModuleConfig(testRoutes,
         {
