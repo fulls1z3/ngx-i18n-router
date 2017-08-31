@@ -15,41 +15,37 @@ export class I18NRouterService {
   languageCode: string;
   useLocalizedRoutes: boolean;
 
-  private readonly routes: Routes;
-  private translations: any;
+  protected readonly routes: Routes;
+  protected translations: any;
 
   constructor(public readonly loader: I18NRouterLoader,
               private readonly router: Router) {
-    this.routes = _.map(this.loader.getRoutes(), _.cloneDeep);
+    this.routes = _.map(this.loader.routes, _.cloneDeep);
   }
 
   init(useLocalizedRoutes = true): void {
-    // don't use i18n-router unless allowed
     if (!useLocalizedRoutes)
       return;
 
     this.useLocalizedRoutes = true;
-    this.translations = this.loader.getTranslations();
+    this.translations = this.loader.translations;
   }
 
   changeLanguage(languageCode: string): void {
-    // don't translate routes unless allowed
     if (!this.useLocalizedRoutes)
       return;
 
-    // don't translate routes unless got translations
     if (!this.translations[languageCode])
       return;
 
     this.languageCode = languageCode;
 
-    const rawRoutes = this.loader.getRoutes();
+    const rawRoutes = this.loader.routes;
     const i18nRoot = _.find(rawRoutes, route => _.get(route, 'data.i18n.isRoot', undefined));
 
     let routes: Routes = [];
 
-    // translate routes
-    if (!!i18nRoot) {
+    if (i18nRoot) {
       const rootPath = this.translateRoute(i18nRoot, 'path').path || i18nRoot.path;
       routes = [{
         path: '',
@@ -77,17 +73,17 @@ export class I18NRouterService {
       if (_.isArray(route.children)) {
         if (_.get(route, 'data.i18n.isRoot', false))
           route.path = this.interpolateRoute(route.path);
-        else if (!!route.path)
-            route = this.translateRoute(route, 'path', moduleKey);
+        else if (route.path)
+          route = this.translateRoute(route, 'path', moduleKey);
 
         route.children = this.translateRoutes(route.children, moduleKey);
       } else if (!moduleKey && route.path === '**')
         route.redirectTo = this.interpolateRoute(route.redirectTo);
       else {
-        if (!!route.path)
+        if (route.path)
           route = this.translateRoute(route, 'path', moduleKey);
 
-        if (!!route.redirectTo)
+        if (route.redirectTo)
           route = this.translateRoute(route, 'redirectTo', moduleKey);
       }
 
@@ -110,18 +106,18 @@ export class I18NRouterService {
     const translateBatch: Array<string> = [];
     let batchKey = '';
 
-    const key = _.filter(route[property].split('/'), segment => !!segment);
+    const key = _.filter(route[property].split('/'), segment => segment);
     const isRedirection = property === 'redirectTo' && _.startsWith(route[property], '/');
 
     (key as Array<string>).forEach((segment: any, index: number) => {
       let prefix = '';
 
-      let currentKey = `${ROOT_ROUTE_PREFIX}.${!!moduleKey && !isRedirection ? `${moduleKey}.` : ''}${segment}`;
+      let currentKey = `${ROOT_ROUTE_PREFIX}.${moduleKey && !isRedirection ? `${moduleKey}.` : ''}${segment}`;
 
       if (index === 0) {
         prefix = this.getTranslation(currentKey);
 
-        if (!!prefix) {
+        if (prefix) {
           if (isRedirection)
             translateBatch.push(this.languageCode);
 
@@ -129,10 +125,10 @@ export class I18NRouterService {
         }
       }
 
-      currentKey = index === 0 ? (!!prefix ? batchKey : segment) : `${batchKey}.${segment}`;
+      currentKey = index === 0 ? (prefix ? batchKey : segment) : `${batchKey}.${segment}`;
       const translatedSegment = !_.startsWith(segment, ':') ? this.getTranslation(currentKey) : '';
 
-      if (!!translatedSegment)
+      if (translatedSegment)
         batchKey = currentKey;
 
       translateBatch.push(translatedSegment || segment);

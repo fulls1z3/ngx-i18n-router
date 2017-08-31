@@ -4,23 +4,14 @@ import { Routes } from '@angular/router';
 // libs
 import * as _ from 'lodash';
 import { ConfigService } from '@ngx-config/core';
-import { I18NRouterLoader } from '@ngx-i18n-router/core';
+import { I18NRouterLoader, I18NRouterSettings } from '@ngx-i18n-router/core';
 
 export class I18NRouterConfigLoader implements I18NRouterLoader {
-  constructor(private readonly config: ConfigService,
-              private readonly routes?: Routes,
-              private readonly group: string = 'routes') {
+  get routes(): Routes {
+    return _.map(this.providedSettings.routes, _.cloneDeep);
   }
 
-  loadTranslations(): any {
-    return Promise.resolve(undefined);
-  }
-
-  getRoutes(): Routes {
-    return _.map(this.routes, _.cloneDeep);
-  }
-
-  getTranslations(): any {
+  get translations(): any {
     if (!this.config)
       throw new Error('No [config] specified!');
 
@@ -28,5 +19,14 @@ export class I18NRouterConfigLoader implements I18NRouterLoader {
       return undefined;
 
     return this.config.getSettings(this.group);
+  }
+
+  constructor(private readonly config: ConfigService,
+              private readonly group: string = 'routes',
+              private readonly providedSettings: I18NRouterSettings = {}) {
+  }
+
+  loadTranslations(): any {
+    return Promise.resolve(undefined);
   }
 }

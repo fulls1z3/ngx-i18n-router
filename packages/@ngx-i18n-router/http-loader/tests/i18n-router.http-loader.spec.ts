@@ -1,7 +1,6 @@
 // angular
 import { async, getTestBed, inject, TestBed } from '@angular/core/testing';
-import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Http } from '@angular/http';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Route, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,65 +9,22 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { I18N_ROUTER_PROVIDERS, I18NRouterLoader, I18NRouterModule, I18NRouterService } from '@ngx-i18n-router/core';
 
 // module
+import { I18NRouterHttpLoaderTestingModule, testTranslations } from '../testing/i18n-router.http-loader.testing.module';
 import { I18NRouterHttpLoader } from '../index';
-
-const mockBackendResponse = (connection: MockConnection, response: any) => {
-  connection.mockRespond(new Response(new ResponseOptions({body: response})));
-};
-
-const mockBackendError = (connection: MockConnection, error: string) => {
-  connection.mockError(new Error(error));
-};
-
-export const testTranslations = {
-  en: {
-    'ROOT.ABOUT': 'about',
-    'ROOT.ABOUT.US': 'us',
-    'ROOT.ABOUT.BANANA': 'banana',
-    'ROOT.ABOUT.APPLE': 'apple',
-    'ROOT.ABOUT.APPLE.PEAR': 'pear',
-    'ROOT.ABOUT.PLUM': 'plum',
-    CHANGE_LANGUAGE: 'change-language'
-  },
-  tr: {
-    'ROOT.ABOUT': 'hakkinda',
-    'ROOT.ABOUT.US': 'biz',
-    // "ROOT.ABOUT.BANANA": 'muz', // commented on purpose
-    'ROOT.ABOUT.APPLE': 'elma',
-    'ROOT.ABOUT.APPLE.PEAR': 'armut',
-    'ROOT.ABOUT.PLUM': 'erik',
-    CHANGE_LANGUAGE: 'dil-secimi'
-  }
-};
 
 const testRoutes: Routes = [];
 
-// test module configuration for each test
 export const testModuleConfig = (routes: Array<Route> = [], moduleOptions?: Array<any>) => {
-  // reset the test environment before initializing it.
   TestBed.resetTestEnvironment();
 
   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting())
     .configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
-        I18NRouterModule.forRoot(routes, moduleOptions)
+        I18NRouterModule.forRoot(routes, moduleOptions),
+        I18NRouterHttpLoaderTestingModule
       ],
-      providers: [
-        {
-          provide: Http,
-          useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
-            return new Http(mockBackend, options);
-          },
-          deps: [
-            MockBackend,
-            BaseRequestOptions
-          ]
-        },
-        MockBackend,
-        BaseRequestOptions,
-        I18N_ROUTER_PROVIDERS
-      ]
+      providers: [I18N_ROUTER_PROVIDERS]
     });
 };
 
@@ -95,7 +51,7 @@ describe('@ngx-i18n-router/http-loader:',
     describe('I18NRouterHttpLoader',
       () => {
         beforeEach(() => {
-          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, testRoutes, '/api/get-routes');
+          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, '/api/routes', {routes: testRoutes});
 
           testModuleConfig(testRoutes, [{
             provide: I18NRouterLoader,
@@ -105,31 +61,37 @@ describe('@ngx-i18n-router/http-loader:',
         });
 
         it('should be able to retrieve route translations from the specified `path`',
-          async(inject([MockBackend, I18NRouterService],
-            (backend: MockBackend, i18nRouter: I18NRouterService) => {
-              // mock response
-              backend.connections.subscribe((c: MockConnection) => mockBackendResponse(c, testTranslations));
-
+          async(inject([I18NRouterService],
+            (i18nRouter: I18NRouterService) => {
               i18nRouter.loader.loadTranslations()
                 .then((res: any) => {
                   expect(res).toEqual(testTranslations);
                 });
             })));
+      });
+
+    describe('I18NRouterHttpLoader',
+      () => {
+        beforeEach(() => {
+          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, '/api/wrong-routes', {routes: testRoutes});
+
+          testModuleConfig(testRoutes, [{
+            provide: I18NRouterLoader,
+            useFactory: (i18nRouterFactory),
+            deps: [Http]
+          }]);
+        });
 
         it('should throw w/o a valid `path`',
-          async(inject([MockBackend, I18NRouterService],
-            (backend: MockBackend, i18nRouter: I18NRouterService) => {
-              // mock error
-              backend.connections.subscribe((c: MockConnection) => mockBackendError(c, '500'));
-
-              // this will produce error at the backend
+          inject([I18NRouterService],
+            (i18nRouter: I18NRouterService) => {
               i18nRouter.loader.loadTranslations()
                 .catch((res: any) => {
                   expect(res).toEqual('Endpoint unreachable!');
 
-                  const loadedTranslations = i18nRouter.loader.getTranslations();
+                  const loadedTranslations = i18nRouter.loader.translations;
                   expect(loadedTranslations).toBeUndefined();
                 });
-            })));
+            }));
       });
   });

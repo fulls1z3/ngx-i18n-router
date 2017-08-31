@@ -10,7 +10,7 @@ import { I18NRouterService, ROOT_ROUTE_PREFIX } from './i18n-router.service';
 @Injectable()
 @Pipe({
   name: 'i18nRouter',
-  pure: false // required to update the value when the promise is resolved
+  pure: false
 })
 export class I18NRouterPipe implements PipeTransform {
   constructor(private readonly i18nRouter: I18NRouterService) {
@@ -42,16 +42,16 @@ export class I18NRouterPipe implements PipeTransform {
         if (index === 0) {
           prefix = this.i18nRouter.getTranslation(currentKey);
 
-          if (!!prefix) {
+          if (prefix) {
             batchKey = currentKey;
             translateBatch.push(this.i18nRouter.languageCode);
           }
         }
 
-        currentKey = index === 0 ? (!!prefix ? batchKey : segment) : `${batchKey}.${segment}`;
+        currentKey = index === 0 ? (prefix ? batchKey : segment) : `${batchKey}.${segment}`;
         const translatedSegment = this.i18nRouter.getTranslation(currentKey);
 
-        if (!!translatedSegment)
+        if (translatedSegment)
           batchKey = currentKey;
 
         translateBatch.push(translatedSegment || segment);
