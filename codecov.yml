@@ -1,0 +1,6 @@
+coverage:
+  status:
+    project:
+      ngx-i18n-router/core:
+        target: 80%
+        paths: packages/@ngx-i18n-router/core
