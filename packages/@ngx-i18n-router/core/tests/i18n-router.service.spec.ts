@@ -9,7 +9,10 @@ import { TestBootstrapComponent, TestComponent, testModuleConfig, testRoutes, te
 describe('@ngx-i18n-router/core:',
   () => {
     beforeEach(() => {
-      const i18nRouterFactory = () => new I18NRouterStaticLoader(testRoutes, testTranslations);
+      const i18nRouterFactory = () => new I18NRouterStaticLoader({
+        routes: testRoutes,
+        translations: testTranslations
+      });
 
       testModuleConfig(testRoutes, [{
         provide: I18NRouterLoader,
@@ -187,7 +190,10 @@ describe('@ngx-i18n-router/core:',
               }
             };
 
-            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+            const i18nRouterFactory = () => new I18NRouterStaticLoader({
+              routes: someRoutes,
+              translations: someTranslations
+            });
 
             testModuleConfig(someRoutes, [{
               provide: I18NRouterLoader,
@@ -240,7 +246,10 @@ describe('@ngx-i18n-router/core:',
               }
             };
 
-            const i18nRouterFactory = () => new I18NRouterStaticLoader(someRoutes, someTranslations);
+            const i18nRouterFactory = () => new I18NRouterStaticLoader({
+              routes: someRoutes,
+              translations: someTranslations
+            });
 
             testModuleConfig(someRoutes, [{
               provide: I18NRouterLoader,
