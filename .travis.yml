@@ -20,15 +20,15 @@ branches:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm i -g npm@^3
+  - yarn
   - cd packages/@ngx-i18n-router/core
-  - npm i -g npm@^3
+  - yarn
   - cd ../../..
   - cd packages/@ngx-i18n-router/http-loader
-  - npm i -g npm@^3
+  - yarn
   - cd ../../..
   - cd packages/@ngx-i18n-router/config-loader
-  - npm i -g npm@^3
+  - yarn
   - cd ../../..
   - sleep 3
 after_failure:
