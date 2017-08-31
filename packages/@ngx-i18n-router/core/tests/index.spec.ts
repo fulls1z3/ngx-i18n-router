@@ -1,8 +1,6 @@
 // angular
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { BaseRequestOptions, Http, HttpModule } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -19,18 +17,17 @@ export class TestComponent {
 }
 
 @NgModule({
+  imports: [RouterTestingModule],
   declarations: [
     TestBootstrapComponent,
     TestComponent
-  ],
-  imports: [RouterTestingModule]
+  ]
 })
 class TestSharedModule {
 }
 
 @NgModule({
   imports: [
-    HttpModule,
     TestSharedModule,
     I18NRouterModule.forChild([
         {
@@ -121,7 +118,7 @@ export const testTranslations = {
   tr: {
     'ROOT.ABOUT': 'hakkinda',
     'ROOT.ABOUT.US': 'biz',
-    // "ROOT.ABOUT.BANANA": 'muz', // commented on purpose
+    // "ROOT.ABOUT.BANANA": 'muz',
     'ROOT.ABOUT.APPLE': 'elma',
     'ROOT.ABOUT.APPLE.PEAR': 'armut',
     'ROOT.ABOUT.PLUM': 'erik',
@@ -129,9 +126,7 @@ export const testTranslations = {
   }
 };
 
-// test module configuration for each test
 export const testModuleConfig = (routes: Routes = [], moduleOptions?: Array<any>) => {
-  // reset the test environment before initializing it.
   TestBed.resetTestEnvironment();
 
   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting())
@@ -142,18 +137,6 @@ export const testModuleConfig = (routes: Routes = [], moduleOptions?: Array<any>
         I18NRouterModule.forRoot(routes, moduleOptions)
       ],
       providers: [
-        {
-          provide: Http,
-          useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
-            return new Http(mockBackend, options);
-          },
-          deps: [
-            MockBackend,
-            BaseRequestOptions
-          ]
-        },
-        MockBackend,
-        BaseRequestOptions,
         I18N_ROUTER_PROVIDERS
       ]
     });

@@ -35,9 +35,6 @@ export function initializerFactory(loader: I18NRouterLoader): any {
 export const I18N_ROUTER_FORROOT_GUARD = new OpaqueToken('I18N_ROUTER_FORROOT_GUARD');
 export const MODULE_KEY = new OpaqueToken('MODULE_KEY');
 
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
 @NgModule({
   imports: [RouterModule],
   declarations: [I18NRouterPipe],
@@ -105,7 +102,7 @@ export class I18NRouterModule {
   }
 
   constructor(@Optional() @Inject(I18N_ROUTER_FORROOT_GUARD) guard: any) {
-    // inject token
+    // NOTE: inject token
   }
 }
 
