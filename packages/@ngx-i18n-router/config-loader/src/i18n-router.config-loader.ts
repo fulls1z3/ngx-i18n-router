@@ -8,19 +8,15 @@ import { I18NRouterLoader } from '@ngx-i18n-router/core';
 
 export class I18NRouterConfigLoader implements I18NRouterLoader {
   constructor(private readonly config: ConfigService,
-              private readonly routes?: Routes,
+              private readonly rawRoutes?: Routes,
               private readonly group: string = 'routes') {
   }
 
-  loadTranslations(): any {
-    return Promise.resolve(undefined);
+  get routes(): Routes {
+    return _.map(this.rawRoutes, _.cloneDeep);
   }
 
-  getRoutes(): Routes {
-    return _.map(this.routes, _.cloneDeep);
-  }
-
-  getTranslations(): any {
+  get translations(): any {
     if (!this.config)
       throw new Error('No [config] specified!');
 
@@ -28,5 +24,9 @@ export class I18NRouterConfigLoader implements I18NRouterLoader {
       return undefined;
 
     return this.config.getSettings(this.group);
+  }
+
+  loadTranslations(): any {
+    return Promise.resolve(undefined);
   }
 }
