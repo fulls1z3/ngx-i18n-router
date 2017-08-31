@@ -6,22 +6,22 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import * as _ from 'lodash';
-import { I18NRouterLoader } from '@ngx-i18n-router/core';
+import { I18NRouterLoader, I18NRouterSettings } from '@ngx-i18n-router/core';
 
 export class I18NRouterHttpLoader implements I18NRouterLoader {
   private _translations: any;
 
-  constructor(private readonly http: Http,
-              private readonly rawRoutes?: Routes,
-              private readonly path: string = '/routes.json') {
-  }
-
   get routes(): Routes {
-    return _.map(this.rawRoutes, _.cloneDeep);
+    return _.map(this.providedSettings.routes, _.cloneDeep);
   }
 
   get translations(): any {
     return this._translations;
+  }
+
+  constructor(private readonly http: Http,
+              private readonly path: string = '/routes.json',
+              private readonly providedSettings: I18NRouterSettings = {}) {
   }
 
   loadTranslations(): any {

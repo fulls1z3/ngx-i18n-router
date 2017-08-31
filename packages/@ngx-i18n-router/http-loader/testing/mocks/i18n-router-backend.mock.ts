@@ -28,12 +28,12 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     .subscribe((connection: MockConnection) => {
       if (connection.request.url.endsWith('/api/routes')
         && connection.request.method === RequestMethod.Get)
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              status: 200,
-              body: testTranslations
-            })
-          ));
+        connection.mockRespond(new Response(
+          new ResponseOptions({
+            status: 200,
+            body: testTranslations
+          })
+        ));
       else
         connection.mockError(new Error('500'));
     });

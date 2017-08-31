@@ -51,7 +51,7 @@ describe('@ngx-i18n-router/http-loader:',
     describe('I18NRouterHttpLoader',
       () => {
         beforeEach(() => {
-          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, testRoutes, '/api/routes');
+          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, '/api/routes', {routes: testRoutes});
 
           testModuleConfig(testRoutes, [{
             provide: I18NRouterLoader,
@@ -73,7 +73,7 @@ describe('@ngx-i18n-router/http-loader:',
     describe('I18NRouterHttpLoader',
       () => {
         beforeEach(() => {
-          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, testRoutes, '/api/wrong-routes');
+          const i18nRouterFactory = (http: Http) => new I18NRouterHttpLoader(http, '/api/wrong-routes', {routes: testRoutes});
 
           testModuleConfig(testRoutes, [{
             provide: I18NRouterLoader,
