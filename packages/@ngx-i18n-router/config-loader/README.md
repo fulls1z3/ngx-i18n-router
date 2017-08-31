@@ -2,6 +2,7 @@
 Loader for [ngx-i18n-router] that provides route translations using [ngx-config]
 
 [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 
 > Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
 
@@ -37,8 +38,8 @@ npm install @ngx-i18n-router/config-loader --save
 **Note**: You should have already installed [@ngx-i18n-router/core] and [@ngx-config/core].
 
 ### <a name="examples"></a> Examples
-- [ng-seed/universal] and [ng-seed/spa] are officially maintained seed projects, showcasing common patterns and best practices
-for **`@ngx-i18n-router/config-loader`**.
+- [ng-seed/universal] and [fulls1z3/example-app] are officially maintained projects, showcasing common patterns and best
+practices for **`@ngx-i18n-router/config-loader`**.
 
 ### <a name="related-packages"></a> Related packages
 The following packages may be used in conjunction with **`@ngx-i18n-router/config-loader`**:
@@ -76,7 +77,7 @@ export function configFactory(http: Http): ConfigLoader {
 }
 
 export function i18nRouterFactory(config: ConfigService, rawRoutes: Routes): I18NRouterLoader {
-  return new I18NRouterConfigLoader(config, rawRoutes, 'routes');
+  return new I18NRouterConfigLoader(config, 'routes', {routes: rawRoutes});
 }
 
 @NgModule({
@@ -113,9 +114,10 @@ export function i18nRouterFactory(config: ConfigService, rawRoutes: Routes): I18
 
 `I18NRouterConfigLoader` has three parameters:
 - **config**: `ConfigService` : ConfigService instance
-- **routes**: `Routes`: raw routes
 - **group**: `string` : group key, to fetch route translations from applcation settings (*by default, `routes`*)
-
+- **providedSettings**: `I18NRouterSettings` : i18n-router settings
+  - **routes**: `Routes`: raw routes
+  
 ### <a name="translations-object"></a> Translations object
 You can find detailed information about the **data structure** and usage guidelines for the translations object [here](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core#translations-object).
 
@@ -161,5 +163,5 @@ Copyright (c) 2017 [Burak Tasci]
 [@ngx-i18n-router/core]: https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core
 [@ngx-config/core]: https://github.com/fulls1z3/ngx-config/tree/master/packages/@ngx-config/core
 [ng-seed/universal]: https://github.com/ng-seed/universal
-[ng-seed/spa]: https://github.com/ng-seed/spa
+[fulls1z3/example-app]: https://github.com/fulls1z3/example-app
 [Burak Tasci]: https://github.com/fulls1z3
