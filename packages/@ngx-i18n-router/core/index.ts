@@ -11,6 +11,7 @@ import { I18NRouterLoader, I18NRouterStaticLoader } from './src/i18n-router.load
 import { I18NRouterPipe } from './src/i18n-router.pipe';
 import { I18NRouterService, provideChildRoutes } from './src/i18n-router.service';
 
+export * from './src/models/i18n-router-settings';
 export * from './src/i18n-router.loader';
 export * from './src/i18n-router.pipe';
 export * from './src/i18n-router.service';
@@ -22,7 +23,7 @@ export const I18N_ROUTER_PROVIDERS: Array<any> = [
 
 // for AoT compilation
 export function i18nRouterFactory(routes: Routes): I18NRouterLoader {
-  return new I18NRouterStaticLoader(routes, {});
+  return new I18NRouterStaticLoader({routes});
 }
 
 export function initializerFactory(loader: I18NRouterLoader): any {
