@@ -2,6 +2,7 @@
 Route internationalization utility for **Angular**
 
 [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 
 > Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
 
@@ -56,8 +57,8 @@ npm install @ngx-i18n-router/core --save
 ```
 
 ### <a name="examples"></a> Examples
-- [ng-seed/universal] and [ng-seed/spa] are officially maintained seed projects, showcasing common patterns and best practices
-for **`@ngx-i18n-router/core`**.
+- [ng-seed/universal] and [fulls1z3/example-app] are officially maintained projects, showcasing common patterns and
+best practices for **`@ngx-i18n-router/core`**.
 
 ### <a name="related-packages"></a> Related packages
 The following packages may be used in conjunction with **`@ngx-i18n-router/core`**
@@ -326,22 +327,25 @@ import { I18NRouterModule, I18NRouterLoader, I18NRouterStaticLoader, I18N_ROUTER
 ...
 
 export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
-  return new I18NRouterStaticLoader(rawRoutes, {
-    "en": {
-      "ROOT.ABOUT": "about",
-      "ROOT.ABOUT.US": "us",
-      "ROOT.ABOUT.BANANA": "banana",
-      "ROOT.ABOUT.APPLE": "apple",
-      "ROOT.ABOUT.APPLE.PEAR": "pear",
-      "CHANGE_LANGUAGE": "change-language"
-    },
-    "tr": {
-      "ROOT.ABOUT": "hakkinda",
-      "ROOT.ABOUT.US": "biz",
-      "ROOT.ABOUT.BANANA": "muz",
-      "ROOT.ABOUT.APPLE": "elma",
-      "ROOT.ABOUT.APPLE.PEAR": "armut",
-      "CHANGE_LANGUAGE": "dil-secimi"
+  return new I18NRouterStaticLoader({
+    routes: rawRoutes,
+    translations: {
+      "en": {
+        "ROOT.ABOUT": "about",
+        "ROOT.ABOUT.US": "us",
+        "ROOT.ABOUT.BANANA": "banana",
+        "ROOT.ABOUT.APPLE": "apple",
+        "ROOT.ABOUT.APPLE.PEAR": "pear",
+        "CHANGE_LANGUAGE": "change-language"
+      },
+      "tr": {
+        "ROOT.ABOUT": "hakkinda",
+        "ROOT.ABOUT.US": "biz",
+        "ROOT.ABOUT.BANANA": "muz",
+        "ROOT.ABOUT.APPLE": "elma",
+        "ROOT.ABOUT.APPLE.PEAR": "armut",
+        "CHANGE_LANGUAGE": "dil-secimi"
+      }
     }
   });
 }
@@ -375,9 +379,10 @@ export function i18nRouterFactory(rawRoutes: Routes): I18NRouterLoader {
 })
 ```
 
-`I18NRouterStaticLoader` has two parameters:
-- **routes**: `Routes`: raw routes
-- **translations**: `any` : route translations
+`I18NRouterStaticLoader` has one parameter:
+- **providedSettings**: `I18NRouterSettings` : i18n-router settings
+  - **routes**: `Routes`: raw routes
+  - **translations**: `any` : route translations
 
 ### <a name="setting-up-httploader"></a> Setting up `I18NRouterModule` to use `I18NRouterHttpLoader`
 If you provide route translations using a `JSON` file or an `API`, you can call the [forRoot] static method using the `I18NRouterHttpLoader`.
@@ -567,7 +572,7 @@ export class ChangeLanguageComponent implements OnInit {
 	this.route.params.subscribe(params => {
 	  var languageCode = params['languageCode'];
 
-      if (!!languageCode)
+      if (languageCode)
         // change language
         this.i18nRouter.changeLanguage(languageCode);
 
@@ -661,7 +666,7 @@ Copyright (c) 2017 [Burak Tasci]
 [master]: https://github.com/fulls1z3/ngx-i18n-router/tree/master
 [v0.2.x]: https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x
 [ng-seed/universal]: https://github.com/ng-seed/universal
-[ng-seed/spa]: https://github.com/ng-seed/spa
+[fulls1z3/example-app]: https://github.com/fulls1z3/example-app
 [@ngx-i18n-router/config-loader]: https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader
 [@ngx-config/core]: https://github.com/fulls1z3/ngx-config/tree/master/packages/@ngx-config/core
 [@ngx-cache/core]: https://github.com/fulls1z3/ngx-cache/tree/master/packages/@ngx-cache/core

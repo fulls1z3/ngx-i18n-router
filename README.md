@@ -4,6 +4,7 @@ Route internationalization utility for **Angular**
 [![Linux build](https://travis-ci.org/fulls1z3/ngx-i18n-router.svg?branch=v0.2.x)](https://travis-ci.org/fulls1z3/ngx-i18n-router)
 [![Windows build](https://ci.appveyor.com/api/projects/status/github/fulls1z3/ngx-i18n-router?branch=v0.2.x&svg=true)](https://ci.appveyor.com/project/fulls1z3/ngx-i18n-router)
 [![coverage](https://codecov.io/github/fulls1z3/ngx-i18n-router/coverage.svg?branch=v0.2.x)](https://codecov.io/gh/fulls1z3/ngx-i18n-router)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 
 > Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
 
@@ -26,14 +27,15 @@ Name | Description | NPM
 [@ngx-i18n-router/config-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader) | Loader for [ngx-i18n-router] that provides route translations using [ngx-config] | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
 
 ### Examples
-- [ng-seed/universal] and [ng-seed/spa] are officially maintained seed projects, showcasing common patterns and best practices for **`ngx-i18n-router`**.
+- [ng-seed/universal] and [fulls1z3/example-app] are officially maintained projects, showcasing common patterns and best
+practices for **`ngx-i18n-router`**.
 
 ## Contributing
 If you want to file a bug, contribute some code, or improve documentation, please read up on the following contribution guidelines:
 - [Issue guidelines](CONTRIBUTING.md#submit)
 - [Contributing guidelines](CONTRIBUTING.md)
 - [Coding rules](CONTRIBUTING.md#rules)
-- [ChangeLog](CHANGELOG.md)
+- [Change log](CHANGELOG.md)
 
 ## License
 The MIT License (MIT)
@@ -46,5 +48,5 @@ Copyright (c) 2017 [Burak Tasci]
 [ngx-i18n-router]: https://github.com/fulls1z3/ngx-i18n-router
 [ngx-config]: https://github.com/fulls1z3/ngx-config
 [ng-seed/universal]: https://github.com/ng-seed/universal
-[ng-seed/spa]: https://github.com/ng-seed/spa
+[fulls1z3/example-app]: https://github.com/fulls1z3/example-app
 [Burak Tasci]: https://github.com/fulls1z3
