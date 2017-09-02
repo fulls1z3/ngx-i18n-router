@@ -1,5 +1,5 @@
 // angular
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Routes } from '@angular/router';
 
 // libs
@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 
 // module
 import { I18NRouterLoader, I18NRouterService, I18NRouterStaticLoader } from '../index';
-import { testModuleConfig, testRoutes, testTranslations } from './index.spec';
+import { testModuleConfig, testRoutes, testTranslations } from './common';
 
 describe('@ngx-i18n-router/core:',
   () => {
@@ -47,8 +47,7 @@ describe('@ngx-i18n-router/core:',
               useFactory: (i18nRouterFactory)
             }]);
 
-            const injector = getTestBed();
-            const i18nRouter = injector.get(I18NRouterService);
+            const i18nRouter = TestBed.get(I18NRouterService);
 
             expect(I18NRouterStaticLoader).toBeDefined();
             expect(i18nRouter.loader).toBeDefined();
@@ -67,7 +66,7 @@ describe('@ngx-i18n-router/core:',
               }
 
               loadTranslations(): any {
-                return (Promise.resolve({}));
+                return Promise.resolve({});
               }
             }
 
@@ -76,8 +75,7 @@ describe('@ngx-i18n-router/core:',
               useClass: CustomLoader
             }]);
 
-            const injector = getTestBed();
-            const i18nRouter = injector.get(I18NRouterService);
+            const i18nRouter = TestBed.get(I18NRouterService);
 
             expect(CustomLoader).toBeDefined();
             expect(i18nRouter.loader).toBeDefined();
