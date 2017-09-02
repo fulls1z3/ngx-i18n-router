@@ -1,5 +1,5 @@
 // angular
-import { async, getTestBed, inject, TestBed } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Route, Routes } from '@angular/router';
@@ -40,8 +40,7 @@ describe('@ngx-i18n-router/http-loader:',
           deps: [Http]
         }]);
 
-        const injector = getTestBed();
-        const i18nRouter = injector.get(I18NRouterService);
+        const i18nRouter = TestBed.get(I18NRouterService);
 
         expect(I18NRouterHttpLoader).toBeDefined();
         expect(i18nRouter.loader).toBeDefined();

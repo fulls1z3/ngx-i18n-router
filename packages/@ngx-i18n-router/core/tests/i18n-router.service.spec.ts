@@ -1,10 +1,10 @@
 // angular
-import { fakeAsync, getTestBed, inject, TestBed } from '@angular/core/testing';
+import { fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 
 // module
 import { I18NRouterLoader, I18NRouterService, I18NRouterStaticLoader } from '../index';
-import { TestBootstrapComponent, TestComponent, testModuleConfig, testRoutes, testTranslations } from './index.spec';
+import { TestBootstrapComponent, TestComponent, testModuleConfig, testRoutes, testTranslations } from './common';
 
 describe('@ngx-i18n-router/core:',
   () => {
@@ -33,8 +33,7 @@ describe('@ngx-i18n-router/core:',
         it('should not translate routes w/o default initialization',
           inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               spyOn(router, 'resetConfig').and.callThrough();
 
@@ -68,8 +67,7 @@ describe('@ngx-i18n-router/core:',
         it('should be able to `partly` translate routes w/missing translations',
           fakeAsync(inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
@@ -86,8 +84,7 @@ describe('@ngx-i18n-router/core:',
         it('should be able to `catchall` redirect to `i18n-root`',
           fakeAsync(inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               i18nRouter.init();
               i18nRouter.changeLanguage('en');
@@ -104,8 +101,7 @@ describe('@ngx-i18n-router/core:',
         it('should be able to translate `path` property of routes',
           fakeAsync(inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
@@ -122,8 +118,7 @@ describe('@ngx-i18n-router/core:',
         it('should be able to translate `redirectTo` property of routes',
           fakeAsync(inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
@@ -140,8 +135,7 @@ describe('@ngx-i18n-router/core:',
         it('should be able to translate routes outside the `i18n-root`',
           fakeAsync(inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              const injector = getTestBed();
-              const router = injector.get(Router);
+              const router = TestBed.get(Router);
 
               i18nRouter.init();
               i18nRouter.changeLanguage('tr');
@@ -200,9 +194,8 @@ describe('@ngx-i18n-router/core:',
               useFactory: (i18nRouterFactory)
             }]);
 
-            const injector = getTestBed();
-            const router = injector.get(Router);
-            const i18nRouter = injector.get(I18NRouterService);
+            const router = TestBed.get(Router);
+            const i18nRouter = TestBed.get(I18NRouterService);
 
             i18nRouter.init();
             i18nRouter.changeLanguage('tr');
@@ -256,9 +249,8 @@ describe('@ngx-i18n-router/core:',
               useFactory: (i18nRouterFactory)
             }]);
 
-            const injector = getTestBed();
-            const router = injector.get(Router);
-            const i18nRouter = injector.get(I18NRouterService);
+            const router = TestBed.get(Router);
+            const i18nRouter = TestBed.get(I18NRouterService);
 
             i18nRouter.init();
             i18nRouter.changeLanguage('tr');
