@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 // module
 import { I18NRouterLoader, I18NRouterPipe, I18NRouterService, I18NRouterStaticLoader } from '../index';
-import { testModuleConfig, testRoutes, testTranslations } from './index.spec';
+import { testModuleConfig, testRoutes, testTranslations } from './common';
 
 describe('@ngx-i18n-router/core:',
   () => {
