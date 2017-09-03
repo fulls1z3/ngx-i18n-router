@@ -29,26 +29,18 @@
     "url": "https://github.com/fulls1z3/ngx-i18n-router/issues"
   },
   "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.0/packages/@ngx-i18n-router/config-loader#readme",
-  "main": "./bundles/config-loader.umd.min.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
+  "main": "./bundles/config-loader.umd.js",
+  "module": "./@ngx-i18n-router/config-loader.es5.js",
+  "es2015": "./@ngx-i18n-router/config-loader.js",
+  "typings": "./config-loader.d.ts",
   "dependencies": {
-    "tslib": "^1.7.1"
-  },
-  "devDependencies": {
-    "@angular/compiler-cli": "~2.4.0",
-    "lodash": "^4.17.4",
-    "@ngx-config/core": "~0.2.0-rc.5",
-    "@ngx-config/http-loader": "~0.2.0-rc.1",
-    "@ngx-i18n-router/core": "~0.2.0-beta.5",
-    "@types/lodash": "4.14.55"
+    "tslib": "~1.7.1"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0 || ^4.0.0",
-    "@angular/router": "^3.0.0 || ^4.0.0",
-    "rxjs": "^5.0.1",
-    "lodash": "^4.17.4",
-    "@ngx-config/core": "^0.2.0-rc.5",
-    "@ngx-i18n-router/core": "~0.2.0-beta.5 || ~0.4.0-beta.2"
+    "@angular/core": ">=2.0.0 <5.0.0",
+    "@angular/router": ">=3.0.0 <5.0.0",
+    "lodash": ">=4.17.4",
+    "@ngx-config/core": ">=0.2.0-rc.5",
+    "@ngx-i18n-router/core": ">=0.2.0-beta.5 || >=0.4.0-beta.2"
   }
 }
