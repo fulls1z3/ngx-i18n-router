@@ -1,0 +1,16 @@
+{
+  "@ngx-i18n-router": {
+    "core": {
+      "angularVersion": 4,
+      "bundle": {
+        "globals": {
+          "@angular/router": "ng.router",
+          "lodash": "_",
+          "lodash/index": "_"
+        },
+        "external": []
+      },
+      "runTests": true
+    }
+  }
+}
