@@ -1,8 +1,0 @@
-{
-  "@ngx-i18n-router": {
-    "core": {
-      "angularVersion": 4,
-      "runTests": true
-    }
-  }
-}
