@@ -1,8 +1,7 @@
 # ngx-i18n-router
 Route internationalization utility for **Angular**
 
-[![Linux build](https://travis-ci.org/fulls1z3/ngx-i18n-router.svg?branch=v0.2.x)](https://travis-ci.org/fulls1z3/ngx-i18n-router)
-[![Windows build](https://ci.appveyor.com/api/projects/status/github/fulls1z3/ngx-i18n-router?branch=v0.2.x&svg=true)](https://ci.appveyor.com/project/fulls1z3/ngx-i18n-router)
+[![CircleCI](https://circleci.com/gh/fulls1z3/ngx-i18n-router/tree/v0.2.x.svg?style=shield)](https://circleci.com/gh/fulls1z3/ngx-i18n-router)
 [![coverage](https://codecov.io/github/fulls1z3/ngx-i18n-router/coverage.svg?branch=v0.2.x)](https://codecov.io/gh/fulls1z3/ngx-i18n-router)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)

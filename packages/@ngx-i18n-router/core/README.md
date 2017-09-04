@@ -186,7 +186,7 @@ import { I18NRouterModule, I18N_ROUTER_PROVIDERS } from '@ngx-i18n-router/core';
   ...
   providers: [
     I18N_ROUTER_PROVIDERS,
-	...
+    ...
   ],
   ...
   bootstrap: [AppComponent]
@@ -504,10 +504,10 @@ routes:
 }
 ```
 
-- Route **path**s are split by **slashes** `/` into string **part**s. When **key**ing and they're separated by **dots** `.`
-(*ex: path: 'goes/to/your-page' -> 'GOES.TO.YOUR_PAGE'*).
-- Route **params** (*followed by colon*) are **not needed to be included** in the translations object (*ex: path: goes/to/:id/page ->
-'GOES.TO.PAGE'*)
+- Route **path**s are split by **slashes** `/` into string **part**s. When **key**ing and they're separated by **dots**
+`.` (*ex: path: 'goes/to/your-page' -> 'GOES.TO.YOUR_PAGE'*).
+- Route **params** (*followed by colon*) are **not needed to be included** in the translations object (*ex: path: goes/to/:id/page
+-> 'GOES.TO.PAGE'*)
 
 ```
 ex: Angular app supports en and tr
@@ -545,7 +545,8 @@ routes:
 }
 ```
 
-> :+1: Hooyah! It was quite a long story, but **`@ngx-i18n-router/core`** will now translate each `path` and `redirectTo` property of routes.
+> :+1: Hooyah! It was quite a long story, but **`@ngx-i18n-router/core`** will now translate each `path` and `redirectTo`
+property of routes.
 
 ## <a name="change-language"></a> Change language (runtime)
 Import `I18NRouterService` using the mapping `'@ngx-i18n-router/core'` and **inject** it in the constructor of **change-language.component**

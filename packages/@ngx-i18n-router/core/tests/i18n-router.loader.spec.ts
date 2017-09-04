@@ -57,16 +57,16 @@ describe('@ngx-i18n-router/core:',
         it('should be able to provide any `I18NRouterLoader`',
           () => {
             class CustomLoader implements I18NRouterLoader {
-              loadTranslations(): any {
-                return (Promise.resolve({}));
-              }
-
               get routes(): Routes {
                 return _.map(testRoutes, _.cloneDeep);
               }
 
               get translations(): any {
                 return testTranslations;
+              }
+
+              loadTranslations(): any {
+                return Promise.resolve({});
               }
             }
 
