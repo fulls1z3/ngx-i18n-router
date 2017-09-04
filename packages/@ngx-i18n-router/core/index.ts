@@ -1,9 +1,10 @@
 // angular
 import {
-  ANALYZE_FOR_ENTRY_COMPONENTS, APP_INITIALIZER, Inject, InjectionToken, ModuleWithProviders, NgModule, Optional,
+  ANALYZE_FOR_ENTRY_COMPONENTS, APP_INITIALIZER, Inject, ModuleWithProviders, NgModule, OpaqueToken, Optional,
   SkipSelf
 } from '@angular/core';
-import { provideRoutes, Router, RouterModule, Routes, ROUTES } from '@angular/router';
+import { provideRoutes, Router, RouterModule, Routes } from '@angular/router';
+import { ROUTES } from '@angular/router/src/router_config_loader';
 
 // module
 import { I18NRouterLoader, I18NRouterStaticLoader } from './src/i18n-router.loader';
@@ -15,7 +16,7 @@ export * from './src/i18n-router.loader';
 export * from './src/i18n-router.pipe';
 export * from './src/i18n-router.service';
 
-export const RAW_ROUTES = new InjectionToken('RAW_ROUTES');
+export const RAW_ROUTES = new OpaqueToken('RAW_ROUTES');
 export const I18N_ROUTER_PROVIDERS: Array<any> = [
   I18NRouterService
 ];
@@ -32,8 +33,8 @@ export function initializerFactory(loader: I18NRouterLoader): any {
   return res;
 }
 
-export const I18N_ROUTER_FORROOT_GUARD = new InjectionToken('I18N_ROUTER_FORROOT_GUARD');
-export const MODULE_KEY = new InjectionToken<string>('MODULE_KEY');
+export const I18N_ROUTER_FORROOT_GUARD = new OpaqueToken('I18N_ROUTER_FORROOT_GUARD');
+export const MODULE_KEY = new OpaqueToken('MODULE_KEY');
 
 @NgModule({
   imports: [RouterModule],

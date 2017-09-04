@@ -22,7 +22,7 @@ section if your app depends on **@angular-cli** or **`@ngtools/webpack`** for [A
 ## Packages:
 Name | Description | NPM
 --- | --- | ---
-[@ngx-i18n-router/core](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core) | Route internationalization utility for **Angular** | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
+[@ngx-i18n-router/core](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/core) | Route internationalization utility for **Angular** | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
 [@ngx-i18n-router/http-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/http-loader) | Loader for [ngx-i18n-router] that provides route translations using `http` | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fhttp-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/http-loader)
 [@ngx-i18n-router/config-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader) | Loader for [ngx-i18n-router] that provides route translations using [ngx-config] | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
 

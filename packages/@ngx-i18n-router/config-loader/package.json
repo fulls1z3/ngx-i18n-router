@@ -1,0 +1,46 @@
+{
+  "name": "@ngx-i18n-router/config-loader",
+  "version": "0.2.0-rc.3",
+  "description": "Loader for ngx-i18n-router that provides route translations using ngx-config",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fulls1z3/ngx-i18n-router.git"
+  },
+  "keywords": [
+    "lazy loading",
+    "localization",
+    "i18n",
+    "async",
+    "plugin",
+    "loader",
+    "configmodule",
+    "config",
+    "localized router",
+    "router",
+    "i18n router",
+    "angular"
+  ],
+  "author": {
+    "name": "Burak Tasci",
+    "email": "me@fulls1z3.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fulls1z3/ngx-i18n-router/issues"
+  },
+  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.0/packages/@ngx-i18n-router/config-loader#readme",
+  "main": "./bundles/config-loader.umd.js",
+  "module": "./@ngx-i18n-router/config-loader.es5.js",
+  "es2015": "./@ngx-i18n-router/config-loader.js",
+  "typings": "./config-loader.d.ts",
+  "dependencies": {
+    "tslib": "~1.7.1"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=2.0.0 <5.0.0",
+    "@angular/router": ">=3.0.0 <5.0.0",
+    "lodash": ">=4.17.4",
+    "@ngx-config/core": ">=0.2.0-rc.5",
+    "@ngx-i18n-router/core": ">=0.2.0-beta.5 || >=0.4.0-beta.2"
+  }
+}

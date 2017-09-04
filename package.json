@@ -37,6 +37,8 @@
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.17",
     "lodash": "^4.17.4",
+    "@ngx-config/core": "~0.2.0-rc.5",
+    "@ngx-config/http-loader": "~0.2.0-rc.1",
     "@types/node": "^8.0.25",
     "@types/lodash": "4.14.55",
     "@types/jest": "^20.0.8",
@@ -77,7 +79,9 @@
     "silent": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "packages/@ngx-i18n-router/core/src/**/**.ts"
+      "packages/@ngx-i18n-router/core/src/**.ts",
+      "packages/@ngx-i18n-router/http-loader/src/**.ts",
+      "packages/@ngx-i18n-router/config-loader/src/**.ts"
     ]
   }
 }

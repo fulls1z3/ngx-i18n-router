@@ -2,7 +2,7 @@
 import { Component, NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { Route, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 // module
@@ -126,7 +126,7 @@ export const testTranslations = {
   }
 };
 
-export const testModuleConfig = (routes: Array<Route> = [], moduleOptions?: Array<any>) => {
+export const testModuleConfig = (routes: Routes = [], moduleOptions?: Array<any>) => {
   TestBed.resetTestEnvironment();
 
   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting())
