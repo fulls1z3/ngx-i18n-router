@@ -2,6 +2,7 @@
 Loader for [ngx-i18n-router] that provides route translations using [ngx-config]
 
 [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 
 > Please support this project by simply putting a Github star. Share this library with friends on Twitter and everywhere else you can.
