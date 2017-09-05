@@ -1,6 +1,6 @@
 {
   "name": "@ngx-i18n-router/core",
-  "version": "0.2.0-beta.5",
+  "version": "2.0.0",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/fulls1z3/ngx-i18n-router/issues"
   },
-  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.0/packages/@ngx-i18n-router/core#readme",
+  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core#readme",
   "main": "./bundles/core.umd.js",
   "module": "./@ngx-i18n-router/core.es5.js",
   "es2015": "./@ngx-i18n-router/core.js",

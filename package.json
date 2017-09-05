@@ -1,6 +1,6 @@
 {
   "name": "ngx-i18n-router",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "Route internationalization utility for Angular",
   "repository": {
     "type": "git",
@@ -40,8 +40,8 @@
     "rxjs": "^5.0.1",
     "zone.js": "^0.7.2",
     "lodash": "^4.17.4",
-    "@ngx-config/core": "~0.2.0-rc.5",
-    "@ngx-config/http-loader": "~0.2.0-rc.1",
+    "@ngx-config/core": "^2.0.0",
+    "@ngx-config/http-loader": "^2.0.0",
     "@types/node": "^8.0.25",
     "@types/lodash": "4.14.55",
     "@types/jest": "^20.0.8",
@@ -49,7 +49,7 @@
     "ts-node": "^3.3.0",
     "glob": "^7.1.2",
     "camelcase": "^4.1.0",
-    "rollup": "^0.42.0",
+    "rollup": "~0.42.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
