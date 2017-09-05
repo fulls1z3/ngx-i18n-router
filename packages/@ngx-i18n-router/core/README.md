@@ -1,8 +1,8 @@
 # @ngx-i18n-router/core [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core) [![npm downloads](https://img.shields.io/npm/dm/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
 Route internationalization utility for **Angular**
 
-[![CircleCI](https://circleci.com/gh/fulls1z3/ngx-i18n-router/tree/v0.2.x.svg?style=shield)](https://circleci.com/gh/fulls1z3/ngx-i18n-router)
-[![coverage](https://codecov.io/github/fulls1z3/ngx-i18n-router/coverage.svg?branch=v0.2.x)](https://codecov.io/gh/fulls1z3/ngx-i18n-router)
+[![CircleCI](https://circleci.com/gh/fulls1z3/ngx-i18n-router/tree/2.x.x.svg?style=shield)](https://circleci.com/gh/fulls1z3/ngx-i18n-router)
+[![coverage](https://codecov.io/github/fulls1z3/ngx-i18n-router/coverage.svg?branch=2.x.x)](https://codecov.io/gh/fulls1z3/ngx-i18n-router)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
@@ -13,9 +13,8 @@ Route internationalization utility for **Angular**
 and also during runtime - when the working language gets changed.
 
 #### NOTICE
-> If you're using `Angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
-
-> If you're using `Angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
+> This *[2.x.x] branch* is intented to work with `@angular v2.x.x`. If you're developing on a later release of **Angular**
+than `v2.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
 
 > Also, please check the [Workaround for '@ngtools/webpack'](#workaround-for-ngtoolswebpack) section if your app depends
 on **@angular/cli** or **`@ngtools/webpack`** for [AoT compilation].
@@ -44,13 +43,10 @@ on **@angular/cli** or **`@ngtools/webpack`** for [AoT compilation].
 - [License](#license)
 
 ## <a name="prerequisites"></a> Prerequisites
-This [v0.2.x] branch of **`@ngx-i18n-router/core`** depends on `Angular v2.0.0` but it's highly recommended that you are
-running at least **`@angular v2.4.0`** and **`@angular/router v3.4.0`**. Older versions contain outdated dependencies, might
-produce errors.
+This library depends on `Angular v2.0.0` but it's highly recommended that you are running at least **`@angular v2.4.0`**.
+Older versions contain outdated dependencies, might produce errors.
 
 Also, please ensure that you are using **`Typescript v2.1.6`** or higher.
-
-> If you're using `Angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
 
 ## <a name="getting-started"> Getting started
 ### <a name="installation"> Installation
@@ -393,12 +389,12 @@ By default, it is configured to retrieve **route translations** from the endpoin
 
 > You can customize this behavior (*and ofc other settings*) by supplying a **api endpoint** to `I18NRouterHttpLoader`.
 
-You can find detailed information about the usage guidelines for the `ConfigHttpLoader` [here](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/http-loader).
+You can find detailed information about the usage guidelines for the `ConfigHttpLoader` [here](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/http-loader).
 
 ### <a name="setting-up-configloader"></a> Setting up `I18NRouterModule` to use `I18NRouterConfigLoader`
 `I18NRouterConfigLoader` provides route translations to **`@ngx-i18n-router/core`** using **`@ngx-config/core`**.
 
-You can find detailed information about the usage guidelines for the `I18NRouterConfigLoader` [here](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader).
+You can find detailed information about the usage guidelines for the `I18NRouterConfigLoader` [here](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/config-loader).
 
 ### <a name="translations-object"></a> Translations object
 The translations object is designed to contain **route translations** in every **language** supported by **Angular** application,
@@ -667,11 +663,11 @@ The MIT License (MIT)
 
 Copyright (c) 2017 [Burak Tasci]
 
-[master]: https://github.com/fulls1z3/ngx-i18n-router/tree/master
-[v0.2.x]: https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x
+[master]: https://github.com/ngx-i18n-router/core/tree/master
+[2.x.x]: https://github.com/ngx-i18n-router/core/tree/2.x.x
 [ng-seed/universal]: https://github.com/ng-seed/universal
 [fulls1z3/example-app]: https://github.com/fulls1z3/example-app
-[@ngx-i18n-router/config-loader]: https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader
+[@ngx-i18n-router/config-loader]: https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/config-loader
 [@ngx-config/core]: https://github.com/fulls1z3/ngx-config/tree/master/packages/@ngx-config/core
 [@ngx-cache/core]: https://github.com/fulls1z3/ngx-cache/tree/master/packages/@ngx-cache/core
 [forRoot]: https://angular.io/docs/ts/latest/guide/ngmodule.html#!#core-for-root
