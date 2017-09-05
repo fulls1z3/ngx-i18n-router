@@ -44,17 +44,17 @@
   dependencies:
     tsickle "^0.2"
 
-"@ngx-config/core@~0.2.0-rc.5":
-  version "0.2.0-rc.5"
-  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-0.2.0-rc.5.tgz#bdc096b791771a97b3e0367d4bcdf05b08dcb216"
+"@ngx-config/core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-2.0.0.tgz#e755bebfd6e0cafee96f90813c61356a217bab7f"
   dependencies:
-    tslib "^1.6.0"
+    tslib "~1.7.1"
 
-"@ngx-config/http-loader@~0.2.0-rc.1":
-  version "0.2.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-0.2.0-rc.1.tgz#18aaa0a7dc30b15783a1c93b6abea69a528150f7"
+"@ngx-config/http-loader@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-2.0.0.tgz#5cc1e597deeb4ca25e39a2322b2c05284e09bcc3"
   dependencies:
-    tslib "^1.6.0"
+    tslib "~1.7.1"
 
 "@types/jest@^20.0.8":
   version "20.0.8"
@@ -2423,7 +2423,7 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup@^0.42.0:
+rollup@~0.42.0:
   version "0.42.0"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.42.0.tgz#56e791b3a2f3dd7190bbb80a375675f2fe0f9b23"
   dependencies:
@@ -2788,7 +2788,7 @@ tsickle@^0.2:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
-tslib@^1.6.0, tslib@^1.7.1:
+tslib@^1.7.1, tslib@~1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
 
