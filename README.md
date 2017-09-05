@@ -1,4 +1,6 @@
 # ngx-i18n-router
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/fulls1z3/ngx-i18n-router.svg)](https://greenkeeper.io/)
 Route internationalization utility for **Angular**
 
 [![CircleCI](https://circleci.com/gh/fulls1z3/ngx-i18n-router.svg?style=shield)](https://circleci.com/gh/fulls1z3/ngx-i18n-router)
