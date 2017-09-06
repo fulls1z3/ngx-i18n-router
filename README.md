@@ -15,9 +15,8 @@ Route internationalization utility for **Angular**
 and also during runtime - when the working language gets changed.
 
 #### NOTICE
-> If you're using `@angular v4.x.x`, use the latest release of `v0.4.x` (*[master] branch*).
-
-> If you're using `@angular v2.x.x`, use the latest release of `v0.2.x` (*[v0.2.x] branch*).
+> This *[4.x.x] branch* is intented to work with `@angular v4.x.x`. If you're developing on a later release of **Angular**
+than `v4.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
 
 > Also, please check the [Workaround for '@ngtools/webpack'](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core/README.md#workaround-for-ngtoolswebpack)
 section if your app depends on **@angular-cli** or **`@ngtools/webpack`** for [AoT compilation].
@@ -26,8 +25,8 @@ section if your app depends on **@angular-cli** or **`@ngtools/webpack`** for [A
 Name | Description | NPM
 --- | --- | ---
 [@ngx-i18n-router/core](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core) | Route internationalization utility for **Angular** | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fcore.svg)](https://www.npmjs.com/package/@ngx-i18n-router/core)
-[@ngx-i18n-router/http-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/http-loader) | Loader for [ngx-i18n-router] that provides route translations using `http` | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fhttp-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/http-loader)
-[@ngx-i18n-router/config-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/v0.2.x/packages/@ngx-i18n-router/config-loader) | Loader for [ngx-i18n-router] that provides route translations using [ngx-config] | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
+[@ngx-i18n-router/http-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/http-loader) | Loader for [ngx-i18n-router] that provides route translations using `http` | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fhttp-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/http-loader)
+[@ngx-i18n-router/config-loader](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/config-loader) | Loader for [ngx-i18n-router] that provides route translations using [ngx-config] | [![npm version](https://badge.fury.io/js/%40ngx-i18n-router%2Fconfig-loader.svg)](https://www.npmjs.com/package/@ngx-i18n-router/config-loader)
 
 ### Examples
 - [ng-seed/universal] and [fulls1z3/example-app] are officially maintained projects, showcasing common patterns and best
@@ -46,7 +45,7 @@ The MIT License (MIT)
 Copyright (c) 2017 [Burak Tasci]
 
 [master]: https://github.com/ngx-i18n-router/core/tree/master
-[v0.2.x]: https://github.com/ngx-i18n-router/core/tree/v0.2.x
+[4.x.x]: https://github.com/ngx-i18n-router/core/tree/4.x.x
 [AoT compilation]: https://angular.io/docs/ts/latest/cookbook/aot-compiler.html
 [ngx-i18n-router]: https://github.com/fulls1z3/ngx-i18n-router
 [ngx-config]: https://github.com/fulls1z3/ngx-config

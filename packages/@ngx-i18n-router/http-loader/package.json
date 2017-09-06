@@ -1,7 +1,7 @@
 {
-  "name": "@ngx-i18n-router/core",
+  "name": "@ngx-i18n-router/http-loader",
   "version": "4.0.0",
-  "description": "Route internationalization utility for Angular",
+  "description": "Loader for ngx-i18n-router that provides route translations using http",
   "repository": {
     "type": "git",
     "url": "https://github.com/fulls1z3/ngx-i18n-router.git"
@@ -11,6 +11,9 @@
     "localization",
     "i18n",
     "async",
+    "plugin",
+    "loader",
+    "http",
     "localized router",
     "router",
     "i18n router",
@@ -24,17 +27,20 @@
   "bugs": {
     "url": "https://github.com/fulls1z3/ngx-i18n-router/issues"
   },
-  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core#readme",
-  "main": "./bundles/core.umd.js",
-  "module": "./@ngx-i18n-router/core.es5.js",
-  "es2015": "./@ngx-i18n-router/core.js",
-  "typings": "./core.d.ts",
+  "homepage": "https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/http-loader#readme",
+  "main": "./bundles/http-loader.umd.js",
+  "module": "./@ngx-i18n-router/http-loader.es5.js",
+  "es2015": "./@ngx-i18n-router/http-loader.js",
+  "typings": "./http-loader.d.ts",
   "dependencies": {
     "tslib": "~1.7.1"
   },
   "peerDependencies": {
     "@angular/core": ">=4.0.0 <5.0.0",
+    "@angular/http": ">=4.0.0 <5.0.0",
     "@angular/router": ">=4.0.0 <5.0.0",
-    "lodash": ">=4.17.4"
+    "rxjs": ">=5.0.1",
+    "lodash": ">=4.17.4",
+    "@ngx-i18n-router/core": ">=4.0.0 <5.0.0"
   }
 }
