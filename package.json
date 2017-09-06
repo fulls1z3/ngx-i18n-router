@@ -73,17 +73,14 @@
       },
       "__TRANSFORM_HTML__": true
     },
-    "moduleNameMapper": {
-      "^ngx-i18n-router/core$": "<rootDir>/packages/@ngx-i18n-router/core/index.ts",
-      "^ngx-i18n-router/core/src/(.*)": "<rootDir>/packages/@ngx-i18n-router/core/$1",
-      "(.*)": "<rootDir>/packages/$1"
-    },
+    "moduleNameMapper": null,
     "cache": false,
-    "noStackTrace": true,
     "silent": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "packages/@ngx-i18n-router/core/src/**/**.ts"
+      "packages/@ngx-i18n-router/core/src/**/**.ts",
+      "packages/@ngx-i18n-router/http-loader/src/**/**.ts",
+      "packages/@ngx-i18n-router/config-loader/src/**/**.ts"
     ]
   },
   "greenkeeper": {
