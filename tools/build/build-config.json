@@ -12,5 +12,36 @@
       },
       "runTests": true
     }
+  },
+  "http-loader": {
+    "angularVersion": 4,
+    "bundle": {
+      "globals": {
+        "@angular/http": "ng.http",
+        "@angular/router": "ng.router",
+        "lodash": "_",
+        "lodash/index": "_",
+        "@ngx-i18n-router/core": "_ngxI18nRouter_core"
+      },
+      "external": [
+        "rxjs/add/operator/map",
+        "rxjs/add/operator/toPromise"
+      ]
+    },
+    "runTests": true
+  },
+  "config-loader": {
+    "angularVersion": 4,
+    "bundle": {
+      "globals": {
+        "@angular/router": "ng.router",
+        "lodash": "_",
+        "lodash/index": "_",
+        "@ngx-config/core": "_ngxConfig_core",
+        "@ngx-i18n-router/core": "_ngxI18nRouter_core"
+      },
+      "external": []
+    },
+    "runTests": true
   }
 }
