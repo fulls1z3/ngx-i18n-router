@@ -63,7 +63,10 @@ export class I18NRouterService {
   getTranslation(key: string): string {
     key = key.replace(/-/, '_');
 
-    return _.get(this.translations, `${this.languageCode}.${key.toUpperCase()}`, undefined);
+    if (!this.translations[this.languageCode][key.toUpperCase()])
+      return undefined;
+
+    return this.translations[this.languageCode][key.toUpperCase()];
   }
 
   translateRoutes(routes: Routes, moduleKey = ''): Routes {
