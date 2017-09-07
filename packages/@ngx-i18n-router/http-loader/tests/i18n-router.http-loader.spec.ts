@@ -1,5 +1,5 @@
 // angular
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Route, Routes } from '@angular/router';
@@ -60,13 +60,13 @@ describe('@ngx-i18n-router/http-loader:',
         });
 
         it('should be able to retrieve route translations from the specified `path`',
-          async(inject([I18NRouterService],
+          inject([I18NRouterService],
             (i18nRouter: I18NRouterService) => {
-              i18nRouter.loader.loadTranslations()
+              return i18nRouter.loader.loadTranslations()
                 .then((res: any) => {
                   expect(res).toEqual(testTranslations);
                 });
-            })));
+            }));
       });
 
     describe('I18NRouterHttpLoader',
