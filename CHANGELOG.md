@@ -1,35 +1,18 @@
 # Change Log
-All notable changes to this project will be documented in this file.
 
-## Current iteration
-### Breaking changes
-- **packaging:** merge public API into a single repository
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## v0.4.0-beta.2 - 2017-05-09
-### Breaking changes
-- **packaging:** rename `@nglibs/i18n-router` to `@ngx-i18n-router/core` (closes [#8](https://github.com/fulls1z3/ngx-i18n-router/issues/8))
-- **packaging:** separate `http` loader from the package (closes [#9](https://github.com/fulls1z3/ngx-i18n-router/issues/9))
+<a name="4.0.0"></a>
+# 4.0.0 (2017-09-07)
 
-### Bug fixes
-- **core:** add `yarn.lock` to npmignore (closes [#7](https://github.com/fulls1z3/ngx-i18n-router/issues/7))
 
-## v0.4.0-beta.1 - 2017-03-15
-### Bug fixes
-- **core:** depend on Angular 2.0.0 (closes [#3](https://github.com/fulls1z3/ngx-i18n-router/issues/3))
+### Bug Fixes
 
-## v0.2.0-beta.4 - 2017-03-15
-### Bug fixes
-- **core:** workaround for AoT compilation
+* depend on Angular 2.0.0 ([#3](https://github.com/fulls1z3/ngx-i18n-router/issues/3)) ([6e6ce77](https://github.com/fulls1z3/ngx-i18n-router/commit/6e6ce77))
+* **core:** fix improper route translations on pipe ([#31](https://github.com/fulls1z3/ngx-i18n-router/issues/31)) ([7df5381](https://github.com/fulls1z3/ngx-i18n-router/commit/7df5381)), closes [#10](https://github.com/fulls1z3/ngx-i18n-router/issues/10)
+* **core:** workaround for AoT compilation ([75db69b](https://github.com/fulls1z3/ngx-i18n-router/commit/75db69b))
 
-## v0.2.0-beta.3 - 2017-02-23
-### Bug fixes
-- **core:** depend on TypeScript 2.1.x
 
-## v0.2.0-beta.2 - 2017-02-20
 ### Features
-- **core:** add 'I18NRouterHttpLoader`
 
-## v0.2.0-beta.1 - 2017-02-17
-### Bug fixes
-- **core:** resolve `Argument of type 'string[]' is not assignable to parameter of type 'string'.)`
-- **core:** providing entryComponents dynamically
+* **http-loader:** add http-loader ([7785b73](https://github.com/fulls1z3/ngx-i18n-router/commit/7785b73))
