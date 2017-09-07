@@ -44,15 +44,15 @@
   dependencies:
     tsickle "^0.2"
 
-"@ngx-config/core@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-2.0.0.tgz#e755bebfd6e0cafee96f90813c61356a217bab7f"
+"@ngx-config/core@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-2.0.1.tgz#26699983f3b1ae8771e15036b323f4cfdabc3200"
   dependencies:
     tslib "~1.7.1"
 
-"@ngx-config/http-loader@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-2.0.0.tgz#5cc1e597deeb4ca25e39a2322b2c05284e09bcc3"
+"@ngx-config/http-loader@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-2.0.1.tgz#743ef16920b9b43503189c7db3ca403eb52889d4"
   dependencies:
     tslib "~1.7.1"
 
