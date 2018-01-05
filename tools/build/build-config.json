@@ -16,7 +16,6 @@
       "angularVersion": 4,
       "bundle": {
         "globals": {
-          "@angular/http": "ng.http",
           "@angular/router": "ng.router",
           "lodash": "_",
           "lodash/index": "_",

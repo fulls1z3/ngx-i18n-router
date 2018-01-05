@@ -14,8 +14,8 @@ Route internationalization utility for **Angular**
 and also during runtime - when the working language gets changed.
 
 #### NOTICE
-> This *[4.x.x] branch* is intented to work with `@angular v4.x.x`. If you're developing on a later release of **Angular**
-than `v4.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
+> This *[5.x.x] branch* is intented to work with `@angular v5.x.x`. If you're developing on a later release of **Angular**
+than `v5.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
 
 > Also, please check the [Workaround for '@ngtools/webpack'](https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/core/README.md#workaround-for-ngtoolswebpack)
 section if your app depends on **@angular-cli** or **`@ngtools/webpack`** for [AoT compilation].
@@ -44,7 +44,7 @@ The MIT License (MIT)
 Copyright (c) 2017 [Burak Tasci]
 
 [master]: https://github.com/ngx-i18n-router/core/tree/master
-[4.x.x]: https://github.com/ngx-i18n-router/core/tree/4.x.x
+[5.x.x]: https://github.com/ngx-i18n-router/core/tree/5.x.x
 [AoT compilation]: https://angular.io/docs/ts/latest/cookbook/aot-compiler.html
 [ngx-i18n-router]: https://github.com/fulls1z3/ngx-i18n-router
 [ngx-config]: https://github.com/fulls1z3/ngx-config

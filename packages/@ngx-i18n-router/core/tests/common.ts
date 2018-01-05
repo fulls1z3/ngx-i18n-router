@@ -9,10 +9,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { I18N_ROUTER_PROVIDERS, I18NRouterModule } from '../index';
 
 @Component({template: '<router-outlet></router-outlet>'})
+// tslint:disable-next-line
 export class TestBootstrapComponent {
 }
 
 @Component({template: ''})
+// tslint:disable-next-line
 export class TestComponent {
 }
 
@@ -23,6 +25,7 @@ export class TestComponent {
     TestComponent
   ]
 })
+// tslint:disable-next-line
 class TestSharedModule {
 }
 
@@ -38,6 +41,7 @@ class TestSharedModule {
       'home')
   ]
 })
+// tslint:disable-next-line
 class TestHomeModule {
 }
 
@@ -72,6 +76,7 @@ class TestHomeModule {
       'about')
   ]
 })
+// tslint:disable-next-line
 class TestAboutModule {
 }
 
