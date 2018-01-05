@@ -79,7 +79,7 @@
     ],
     "moduleNameMapper": null,
     "cache": false,
-    "silent": false,
+    "silent": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
       "packages/@ngx-i18n-router/core/src/**/**.ts",
