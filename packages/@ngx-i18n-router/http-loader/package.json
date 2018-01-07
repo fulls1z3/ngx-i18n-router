@@ -1,6 +1,6 @@
 {
   "name": "@ngx-i18n-router/http-loader",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Loader for ngx-i18n-router that provides route translations using http",
   "repository": {
     "type": "git",
