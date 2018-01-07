@@ -55,17 +55,17 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@ngx-config/core@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-4.0.1.tgz#d3f18dd46a090bbb571af7b871a48aba5ee47d09"
+"@ngx-config/core@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-config/core/-/core-5.0.0.tgz#99f38be8e95b408bfb184943a515fe2980a4e43a"
   dependencies:
-    tslib "~1.7.1"
+    tslib "~1.8.1"
 
-"@ngx-config/http-loader@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-4.0.1.tgz#f201e6d9c511137799622c1a6c00e34ec1093fa9"
+"@ngx-config/http-loader@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ngx-config/http-loader/-/http-loader-5.0.0.tgz#f8265ccfb62ee8fa3d893430e6e0653eb826ab8c"
   dependencies:
-    tslib "~1.7.1"
+    tslib "~1.8.1"
 
 "@types/jest@~22.0.1":
   version "22.0.1"
@@ -3450,11 +3450,11 @@ tsickle@^0.25.5:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
-tslib@^1.7.1, tslib@~1.7.1:
+tslib@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
 
-tslib@^1.8.1:
+tslib@^1.8.1, tslib@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
 
