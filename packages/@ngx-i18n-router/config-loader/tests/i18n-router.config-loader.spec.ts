@@ -1,6 +1,7 @@
 // angular
 import { async, inject, TestBed } from '@angular/core/testing';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -11,9 +12,18 @@ import { ConfigHttpLoader } from '@ngx-config/http-loader';
 import { I18N_ROUTER_PROVIDERS, I18NRouterLoader, I18NRouterModule, I18NRouterService, RAW_ROUTES } from '@ngx-i18n-router/core';
 
 // module
-import { I18NRouterConfigLoaderTestingModule, testSettings } from '../testing/i18n-router.config-loader.testing.module';
 import { I18NRouterConfigLoader } from '../index';
 
+export const testSettings = {
+  routes: {
+    en: {
+      'ROOT.ABOUT': 'about'
+    },
+    tr: {
+      'ROOT.ABOUT': 'hakkinda'
+    }
+  }
+};
 const testRoutes: Routes = [];
 
 const testModuleConfig = (routes: Routes = [], configOptions?: any, i18nRouterOptions?: Array<any>) => {
@@ -22,10 +32,10 @@ const testModuleConfig = (routes: Routes = [], configOptions?: any, i18nRouterOp
   TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting())
     .configureTestingModule({
       imports: [
+        HttpClientTestingModule,
         RouterTestingModule,
         ConfigModule.forRoot(configOptions),
-        I18NRouterModule.forRoot(routes, i18nRouterOptions),
-        I18NRouterConfigLoaderTestingModule
+        I18NRouterModule.forRoot(routes, i18nRouterOptions)
       ],
       providers: [I18N_ROUTER_PROVIDERS]
     });
@@ -34,7 +44,7 @@ const testModuleConfig = (routes: Routes = [], configOptions?: any, i18nRouterOp
 describe('@ngx-i18n-router/config-loader:',
   () => {
     beforeEach(() => {
-      const configFactory = (http: Http) => new ConfigHttpLoader(http);
+      const configFactory = (http: HttpClient) => new ConfigHttpLoader(http);
       const i18nRouterFactory = (config: ConfigService, rawRoutes: Routes) => new I18NRouterConfigLoader(config, 'routes',
         {routes: rawRoutes});
 
@@ -42,7 +52,7 @@ describe('@ngx-i18n-router/config-loader:',
         {
           provide: ConfigLoader,
           useFactory: (configFactory),
-          deps: [Http]
+          deps: [HttpClient]
         },
         [{
           provide: I18NRouterLoader,
@@ -82,6 +92,14 @@ describe('@ngx-i18n-router/config-loader:',
                   const loadedTranslations = i18nRouter.loader.translations;
                   expect(loadedTranslations).toEqual(testSettings['routes']);
                 });
+
+              const httpMock = TestBed.get(HttpTestingController);
+              const reqs = httpMock.match('/config.json');
+
+              for (const req of reqs)
+                req.flush(testSettings);
+
+              httpMock.verify();
             })));
       });
   });

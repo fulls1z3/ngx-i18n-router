@@ -9,7 +9,7 @@
     "pipe-naming": [
       true,
       "camelCase",
-      "i18n"
+      "config"
     ]
   }
 }

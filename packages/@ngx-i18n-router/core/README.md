@@ -13,8 +13,8 @@ Route internationalization utility for **Angular**
 and also during runtime - when the working language gets changed.
 
 #### NOTICE
-> This *[4.x.x] branch* is intented to work with `@angular v4.x.x`. If you're developing on a later release of **Angular**
-than `v4.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
+> This *[5.x.x] branch* is intented to work with `@angular v5.x.x`. If you're developing on a later release of **Angular**
+than `v5.x.x`, then you should probably choose the appropriate version of this library by visiting the *[master] branch*.
 
 > Also, please check the [Workaround for '@ngtools/webpack'](#workaround-for-ngtoolswebpack) section if your app depends
 on **@angular/cli** or **`@ngtools/webpack`** for [AoT compilation].
@@ -45,7 +45,7 @@ on **@angular/cli** or **`@ngtools/webpack`** for [AoT compilation].
 ## <a name="prerequisites"></a> Prerequisites
 This library depends on `Angular v4.0.0`. Older versions contain outdated dependencies, might produce errors.
 
-Also, please ensure that you are using **`Typescript v2.3.4`** or higher.
+Also, please ensure that you are using **`Typescript v2.5.3`** or higher.
 
 ## <a name="getting-started"> Getting started
 ### <a name="installation"> Installation
@@ -660,10 +660,10 @@ function _collectRoutes(providers, reflector, ROUTES) {
 ## <a name="license"></a> License
 The MIT License (MIT)
 
-Copyright (c) 2017 [Burak Tasci]
+Copyright (c) 2018 [Burak Tasci]
 
 [master]: https://github.com/ngx-i18n-router/core/tree/master
-[4.x.x]: https://github.com/ngx-i18n-router/core/tree/4.x.x
+[5.x.x]: https://github.com/ngx-i18n-router/core/tree/5.x.x
 [ng-seed/universal]: https://github.com/ng-seed/universal
 [fulls1z3/example-app]: https://github.com/fulls1z3/example-app
 [@ngx-i18n-router/config-loader]: https://github.com/fulls1z3/ngx-i18n-router/tree/master/packages/@ngx-i18n-router/config-loader

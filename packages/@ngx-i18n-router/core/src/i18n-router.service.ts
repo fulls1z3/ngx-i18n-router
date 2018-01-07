@@ -18,7 +18,7 @@ export class I18NRouterService {
   protected readonly routes: Routes;
   protected translations: any;
 
-  constructor(public readonly loader: I18NRouterLoader,
+  constructor(readonly loader: I18NRouterLoader,
               private readonly router: Router) {
     this.routes = _.map(this.loader.routes, _.cloneDeep);
   }

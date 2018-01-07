@@ -1,6 +1,6 @@
 {
   "name": "@ngx-i18n-router/config-loader",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Loader for ngx-i18n-router that provides route translations using ngx-config",
   "repository": {
     "type": "git",
@@ -34,13 +34,16 @@
   "es2015": "./@ngx-i18n-router/config-loader.js",
   "typings": "./config-loader.d.ts",
   "dependencies": {
-    "tslib": "~1.7.1"
+    "tslib": "~1.8.1"
   },
   "peerDependencies": {
-    "@angular/core": ">=4.0.0 <5.0.0",
-    "@angular/router": ">=4.0.0 <5.0.0",
+    "@angular/common": ">=5.0.0 <6.0.0",
+    "@angular/core": ">=5.0.0 <6.0.0",
+    "@angular/platform-browser-dynamic": ">=5.0.0 <6.0.0",
+    "@angular/router": ">=5.0.0 <6.0.0",
     "lodash": ">=4.17.4",
-    "@ngx-config/core": ">=4.0.0 <5.0.0",
-    "@ngx-i18n-router/core": ">=4.0.0 <5.0.0"
+    "@ngx-config/core": ">=5.0.0 <6.0.0",
+    "@ngx-config/http-loader": ">=5.0.0 <6.0.0",
+    "@ngx-i18n-router/core": ">=5.0.0 <6.0.0"
   }
 }
