@@ -67,9 +67,9 @@
   dependencies:
     tslib "~1.8.1"
 
-"@types/jest@~22.1.0":
-  version "22.1.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.1.0.tgz#c1de03bbac66fac4cc741f7a69cb73bc01a1707c"
+"@types/jest@~23.0.2":
+  version "23.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.2.tgz#f03f9e6dd2206cc2a2e8fd033161b0b7cf905db6"
 
 "@types/lodash@4.14.55":
   version "4.14.55"
