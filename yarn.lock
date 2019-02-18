@@ -67,9 +67,17 @@
   dependencies:
     tslib "~1.8.1"
 
-"@types/jest@~22.1.0":
-  version "22.1.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.1.0.tgz#c1de03bbac66fac4cc741f7a69cb73bc01a1707c"
+"@types/jest-diff@*":
+  version "20.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
+  integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
+
+"@types/jest@~24.0.6":
+  version "24.0.6"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.6.tgz#ba4c8c7900ce098a82ca99293cbe4192bde4f355"
+  integrity sha512-NE7FBG/F4cMDKdCBqgyd+Sa6JZ5GiMOyA5QwJdeS4Ii/Z9a18WgGbFrHbcr48/7I9HdnkaAYP+S2MmQ27qoqJA==
+  dependencies:
+    "@types/jest-diff" "*"
 
 "@types/lodash@4.14.55":
   version "4.14.55"
