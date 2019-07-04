@@ -143,7 +143,6 @@ amdefine@>=0.0.4:
 angular-tslint-rules@1.17.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/angular-tslint-rules/-/angular-tslint-rules-1.17.0.tgz#68d29c511eb779e01d7a07e3f2b39fffdbb9a034"
-  integrity sha512-0n4vYQPc1zGpDdj96bOOlR+6y6tdFliHxrJS0GAk8E5Z6tgzYi9MTY5qYQUXUA5nYXTKhR+rrgJDM9b1MJmLKg==
 
 ansi-escapes@^3.0.0:
   version "3.0.0"
